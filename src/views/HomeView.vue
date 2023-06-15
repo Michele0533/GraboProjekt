@@ -1,10 +1,10 @@
 <script>
-import Main_Component from '../components/Home_Components/Main_Component.vue'
-import Generatepack_Component from './Generatepack_Component.vue';
+import Generatepack_Component from '../components/Home_Components/Generatepack_Component.vue'
+import MainComponent from '../components/Home_Components/MainComponent.vue';
 </script>
 
 <template>
   <main>
-    <HomeViewComponent/>
+    <MainComponent/>
   </main>
 </template>

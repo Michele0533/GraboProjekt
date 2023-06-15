@@ -4,7 +4,6 @@
   <div class="greetings">
     <p>HomeView : Hello Worldcomp</p>
   </div>
-  <Generatepack_Component/>
 </template>
 
 <script>
@@ -12,9 +11,9 @@ import axios from 'axios'
 
 
 export default {
-  name: 'ArticlesComp',
+  name: 'MainComponent',
   Component: {
-    Generatepack_Component
+    
   },
   props: {
     msg: String
