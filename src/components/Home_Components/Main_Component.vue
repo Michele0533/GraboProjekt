@@ -1,7 +1,5 @@
-
-
 <template>
-  <div class="greetings">
+  <div>
     <p>HomeView : Hello Worldcomp</p>
   </div>
   <Generatepack_Component/>
