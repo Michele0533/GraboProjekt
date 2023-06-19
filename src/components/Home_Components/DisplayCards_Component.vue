@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="greetings">
       <p>HomeView : Hello Worldcomp</p>
