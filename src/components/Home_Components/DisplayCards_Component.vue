@@ -3,42 +3,30 @@
 <template>
     <div class="greetings">
       <p>HomeView : Hello Worldcomp</p>
+      <button @click="test()"> Open a Pack</button>
+      <p>{{ Text }}</p>
     </div>
   </template>
   
   <script>
-  import axios from 'axios'
-  
-  export default {
-    name: 'ArticlesComp',
-    props: {
-      msg: String
-    },
-    data() {
-      return {
-        
-      };
-    },
-    mounted(){
-           //API Daten aufrufen beim lifecyle "Mounted - hinzufügen im DOM"
-        this.fetchData()
-    },
-    computed: {
-      
-    },
-    methods: {
-        // Methode für API Call
-      async fetchData(){
-        await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
-          console.log(response)
-        }).catch(error => {
-          console.log(error)
-          this.isLoading = false
-        });
-      }
-    }
+
+export default {
+  name: 'Generatepack_Component',
+  props: ["packs"],Text,
+  data() {
+    return {
+      Text:'',
+    };
+  },
+  mounted(){
+  },
+  computed: {
+
+  },
+  methods: {
   }
-  </script>
-  
-  <style scoped>
-  </style>
+}
+</script>
+
+<style scoped>
+</style>

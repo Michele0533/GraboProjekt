@@ -1,6 +1,5 @@
 <template>
   <main>
-    <div>working</div>
     <Main_Component/>
   </main>
 </template>

@@ -1,29 +1,42 @@
 <template>
-    <div class="greetings">
-      <p style="background-color: blue">HomeView : Hello Worldcomp</p>
-    </div>
-  </template>
-  
-  <script>
+  <div style="background-color: blue">
+    <button @click="generatePack()"> Open a Pack</button>
+  </div>
+</template>
 
-  export default {
-    name: 'Generatepack_Component',
-    props: {
-      msg: String
+<script>
+
+export default {
+  name: 'Generatepack_Component',
+  props: ["Uapidata"],
+  data() {
+    return {
+      pack: [],
+    };
+  },
+  mounted(){
+  },
+  computed: {
+
+  },
+  methods: {
+    generatePack(){
+      console.log("working");
+      let rand = []
+      let pack = []
+      for(let i=0;i<10;i++){
+        rand[i] = Math.floor(Math.random() * 251);
+        pack[i] = this.Uapidata.data[rand[i]];
+    }
+
+      console.log(pack);
     },
-    data() {
-      return {
-      };
-    },
-    mounted(){
-    },
-    computed: {
-      
-    },
-    methods: {
+    DisplayPack(){
+      Text = packs.names
     }
   }
-  </script>
-  
-  <style scoped>
-  </style>
+}
+</script>
+
+<style scoped>
+</style>
