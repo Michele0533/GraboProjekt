@@ -6,8 +6,9 @@
     </div>
   </template>
   
-  <script>
 
+  <script>
+    //  TODO: hier muss die Logik fürs darstellen der gezogenen Karten implementiert werde. 
 export default {
   name: 'Generatepack_Component',
   props: ["packs"],Text,
