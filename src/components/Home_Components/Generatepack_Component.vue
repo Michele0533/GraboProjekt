@@ -1,6 +1,6 @@
 <template>
-    <div class="greetings">
-      <p style="background-color: blue">HomeView : Hello Worldcomp</p>
+    <div style="background-color: blue">
+      <button @click="generatePack()"> press me</button>
     </div>
   </template>
   
@@ -21,6 +21,9 @@
       
     },
     methods: {
+      generatePack(){
+        console.log("working");
+      }
     }
   }
   </script>

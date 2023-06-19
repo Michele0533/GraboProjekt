@@ -1,10 +1,9 @@
 
 <template>
-  <div class="greetings">
-    <p style="background-color: rgb(61, 61, 131)">Main_Component</p>
+  <div style="background-color: rgb(61, 61, 131)">
+    <p>Main_Component</p>
+    <Generatepack_Component/>
   </div>
-
-  <Generatepack_Component/>
 </template>
 
 <script>
