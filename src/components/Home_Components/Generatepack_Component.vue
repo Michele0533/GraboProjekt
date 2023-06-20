@@ -2,17 +2,25 @@
   <div>
     <button @click="generatePack()">Open a Pack</button>
   </div>
+  <div>
+    <DisplayCards_Component :packs="this.pack" v-if="packGenerated"/>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'; // Import the axios library
+  import DisplayCards_Component from './DisplayCards_Component.vue'
+import axios from 'axios';
 import { useStore } from 'vuex';
 
 export default {
   name: 'Generatepack_Component',
   props: ["Uapidata"],
+  components: {
+    DisplayCards_Component
+  },
   data() {
     return {
+      packGenerated: false,
       user: "",
       pack: [],
       DBindexArray: [],
@@ -31,13 +39,19 @@ export default {
         pack[i] = this.Uapidata.data[rand[i]];
       }
         //  konsolenausgabe für gezogenen karten & Methode aufrufen
+      this.packGenerated = true
       console.log(pack);
       console.log(this.DBindexArray);
 
         //  user von VUEX abrufen
       let VUEXuser = this.$store.getters.getCurrentUser;
       this.user = VUEXuser
-      this.sendUserdataToDB(this.user, this.DBindexArray);
+      if(this.user != null){
+         this.sendUserdataToDB(this.user, this.DBindexArray);
+      } else {
+        console.log("um die Karten zu speichern musst du dich anmelden")
+      }
+     
     },
 
 

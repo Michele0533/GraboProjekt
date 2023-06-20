@@ -47,7 +47,7 @@ export default {
   methods: {
     async fetchData() {
       await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
-        //this.$store.dispatch('setApiData', response.data);    // Speichere die Pokemon API daten in VUEX
+        console.log(response.data)
         this.apidata = response.data;
         this.apiCallFinish = true;
 
