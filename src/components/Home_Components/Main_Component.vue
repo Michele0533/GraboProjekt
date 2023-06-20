@@ -13,6 +13,7 @@
   <p> aktueller Benutzer: {{ this.currentuser }} </p>
   <button v-if="(currentuser == 'warte auf log in..')" @click="openLoginWindow()">Login</button>
   <button v-if="(currentuser != 'warte auf log in..')" @click="logout()">Log out</button>
+  <button v-if="(currentuser == 'warte auf log in..')" @click="openRegisterWindow()">Register</button>
 </template>
 
 <script>
@@ -67,7 +68,10 @@ export default {
       console.log("erfolgreich ausgelogt.");
       this.currentuser="warte auf log in.."
       this.loggedIn = false;
-    }
+    },
+    openRegisterWindow() {
+      this.$router.push('/register');  //  zum Anmelde View weiterleiten (router)
+    },
 
 //  -----------------------------------------------------------------------------------------------------------------------------------
  

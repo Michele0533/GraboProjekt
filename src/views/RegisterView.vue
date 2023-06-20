@@ -1,15 +1,13 @@
 <template>
   <div>
-    <h2>Login</h2>
-    <form @submit.prevent="login">
+    <h2>Register</h2>
+    <form @submit.prevent="Register">
       <label for="username">Benutzername:</label>
       <input type="text" id="username" v-model="username" required>
       <label for="password">Passwort:</label>
       <input type="password" id="password" v-model="password" required>
-      <button type="submit">Einloggen</button>
+      <button type="submit">register</button>
     </form>
-    <p> users: myuser1234 , TestUserForDemo </p>
-    <p> pw:    Passw0rd! </p>
     <h2>{{ "Status: " + this.message }}</h2>
   </div>
   
@@ -30,12 +28,12 @@ export default {
     };
   },
   methods: {
-    login() {
+    Register() {
       if (this.username !== '' && this.password !== '') {
         this.message = "lade..";
 
           // API Request - Prüfe ob Eingabe korrekt ist.
-        axios.get(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
+        axios.post(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
           .then(response => {
             this.message = response.data;
             setTimeout(() => {
