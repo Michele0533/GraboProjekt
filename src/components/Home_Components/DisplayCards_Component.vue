@@ -1,7 +1,7 @@
 <template>
     <div class="greetings" style="background-color: beige">
       <p> DisplayCards_Component - hier werden die gezogenen Pokemon Karten angezeigt. </p>
-      <p>{{ this.packs }}</p>
+      <p>{{ this.pokemonNames }}</p>
     </div>
   </template>
   
@@ -14,7 +14,17 @@ export default {
   data() {
     return {
       Text:'',
+      packlist: {},
+      pokemonNames: []
     };
+  },
+  mounted() {
+    this.packlist = this.packs;
+    console.log(this.packlist);
+    for (let pokemon in this.packlist) {
+      this.pokemonNames[pokemon] = this.packlist[pokemon].name;
+    }
+    console.log(this.pokemonNames)
   }
 }
 </script>

@@ -36,11 +36,11 @@ export default {
       for (let i = 0; i < 10; i++) {
         rand[i] = Math.floor(Math.random() * 251);
         this.DBindexArray[i] = rand[i];
-        pack[i] = this.Uapidata.data[rand[i]];
+        this.pack[i] = this.Uapidata.data[rand[i]];
       }
         //  konsolenausgabe für gezogenen karten & Methode aufrufen
       this.packGenerated = true
-      console.log(pack);
+      console.log(this.pack);
       console.log(this.DBindexArray);
 
         //  user von VUEX abrufen
