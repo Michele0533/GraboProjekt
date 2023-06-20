@@ -6,7 +6,6 @@
       </div>
     </div>
   </template>
-  
 
   <script>
     //  TODO: hier muss die Logik fürs darstellen der gezogenen Karten implementiert werde. 
@@ -22,11 +21,9 @@ export default {
   },
   mounted() {
     this.packlist = this.packs;
-    console.log(this.packlist);
     for (let pokemon in this.packlist) {
       this.pokemonNames[pokemon] = this.packlist[pokemon].images.large;
     }
-    console.log(this.pokemonNames)
   }
 }
 </script>

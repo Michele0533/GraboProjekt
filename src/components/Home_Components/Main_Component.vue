@@ -37,7 +37,6 @@ export default {
   },
   mounted() {
     let VUEXuser = this.$store.getters.getCurrentUser;
-    console.log("aktueller User: ", VUEXuser);
     if (VUEXuser == null) {
       this.currentuser = "warte auf log in.."
     } else {
@@ -48,7 +47,7 @@ export default {
   methods: {
     async fetchData() {
       await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
-        console.log(response.data)
+        this.$store.dispatch('setApiData', response.data); 
         this.apidata = response.data;
         this.apiCallFinish = true;
 
