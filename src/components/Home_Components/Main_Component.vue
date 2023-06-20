@@ -5,10 +5,8 @@
     </div>
     <div v-if="getapidata">
       <Generatepack_Component :Uapidata="apidata" v-if="!loggedIn" />
-      <button v-else @click="logout">Logout</button>
-      <div v-if="!loggedIn">
-        <button @click="openLoginWindow">Log In</button>
-      </div>
+      <button @click="openLoginWindow()">Login</button>
+      <button v-if="(currentuser != 'warte auf log in..')" @click="logout()">Log out</button>
     </div>
     <div v-else>
       Loading API data...
@@ -39,17 +37,18 @@ export default {
       loggedIn: false
     };
   },
-  computed: {
-      //  hier sollte eig der global gespeicherter Benutzer aufgerufen werden - funktuniert somhow nicht so richtig.
-    currentUser() {
-      const store = useStore();
-      let user = store.getters.getCurrentUser;
-      console.log("aktueller User: " ,user);
-      return user
-    }
+  computed() {
+    return "Tom"; // Beispielwert, den die berechnete Eigenschaft repräsentiert
   },
   mounted() {
-    this.fetchData();
+    let VUEXuser = this.$store.getters.getCurrentUser;
+    console.log("aktueller User: ", VUEXuser);
+    if (VUEXuser == null) {
+      this.currentuser = "warte auf log in.."
+    } else {
+      this.currentuser = VUEXuser;
+    }
+    this.fetchData(); // rufe API Call bei Mounted lifecycle auf.
   },
   methods: {
     async fetchData() {
@@ -66,6 +65,9 @@ export default {
       this.$router.push('/login');
     },
     logout() {
+      this.$store.dispatch('setCurrentUser', null); //  log out logik - gespeicherten angemeldeten user auf null setzen.
+      console.log("erfolgreich ausgelogt.");
+      this.currentuser="warte auf log in.."
       this.loggedIn = false;
     }
   }

@@ -8,62 +8,44 @@
       <input type="password" id="password" v-model="password" required>
       <button type="submit">Einloggen</button>
     </form>
-
-    <h2>Create Account</h2>
-    <form @submit.prevent="createAccount">
-      <label for="newUsername">Benutzername:</label>
-      <input type="text" id="newUsername" v-model="newUsername" required>
-      <label for="newPassword">Passwort:</label>
-      <input type="password" id="newPassword" v-model="newPassword" required>
-      <button type="submit">Account erstellen</button>
-    </form>
-
-    <h2>Angemeldet als: {{ currentUser }}</h2>
+    <p> Example: myuser1234     Passw0rd! </p>
+    <h2>{{ "Status: " + this.message }}</h2>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import { useStore } from 'vuex';
 
 export default {
   data() {
     return {
+      url: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardLogInTrigger',
+      code: 'zzrkFoLkMlBkIcx5qvEBifZzzoxnczy5_rRUGAGpc0k5AzFuplGmMg==',
+      message: "warte auf Log In",
       username: '',
       password: '',
-      newUsername: '',
-      newPassword: ''
     };
   },
   methods: {
     login() {
-      // Füge hier die Logik für die Überprüfung des Benutzernamens und Passworts hinzu
-      if (this.newUsername !== '' && this.newPassword !== '') {
-        // Api Call um user von Datenbank zu bestätigen und als aktiven Benutzer setzen.
-        const user = {
-          username: this.newUsername,
-          password: this.newPassword
-        };
-        this.$store.dispatch('setCurrentUser', user);
-        this.$router.go(-1); // Zur vorherigen Seite zurückleiten
-        alert('Erfolgreich eingeloggt!');
-      } else {
-        alert('Ungültige Anmeldeinformationen!');
-      }
-    },
+      if (this.username !== '' && this.password !== '') {
+        this.message = "lade..";
 
-    createAccount() {
-      // Füge hier die Logik für die Erstellung eines neuen Benutzerkontos hinzu
-      if (this.newUsername !== '' && this.newPassword !== '') {
-        // Api Call um user zur Datenbank hinzuzufügen.
-        alert('Account erfolgreich erstellt!');
-      } else {
-        alert('Ungültige Anmeldeinformationen!');
+        // API Request - Prüfe ob Eingabe korrekt ist.
+        axios.get(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
+          .then(response => {
+            this.message = response.data;
+            setTimeout(() => {
+              this.$store.dispatch('setCurrentUser', this.username);    // Speichere den aktuell angemeldeten Benutzer global.
+              this.$router.go(-1);                                      // Weiterleitung zur vorherigen Seite.
+            }, 1500); // Verzögerung von 1,5 Sekunden
+          })
+          .catch(error => {
+            this.message = error.response.data; // Fehlermeldung ausgeben.
+            alert(error.response.data);
+          });
       }
-    }
-  },
-  computed: {
-    currentUser() {
-      return this.$store.getters.getCurrentUser;
     }
   }
 };

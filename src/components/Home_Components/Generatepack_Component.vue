@@ -6,6 +6,7 @@
 
 <script>
 import axios from 'axios'; // Import the axios library
+import { useStore } from 'vuex';
 
 export default {
   name: 'Generatepack_Component',
@@ -47,6 +48,9 @@ export default {
           username,
           cards: ArrayData
         });
+        // Speichern der API-Daten im Store
+        store.dispatch('setApiData', response.data);
+
         console.log('Data successfully sent to the database:', response.data);
       } catch (error) {
         console.error('Error while sending data to the database:', error);
