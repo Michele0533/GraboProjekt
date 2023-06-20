@@ -1,57 +1,57 @@
 <template>
   <div>
-    <Display_Statistics v-if="checkApiData" :StatisticApidata="this.ApiData" />
+    <p>{{ currentuser }}</p>
+  </div>
+  <div v-if="currentuser !== 'du musst dich anmelden um statistiken zu sehen'">
+    <Display_Statistics v-if="checkApiData" :StatisticApidata="ApiData" />
     <div v-else>
       Userdaten werden von der Datenbank geladen...
     </div>
   </div>
 </template>
-
 <script>
-  import Display_Statistics from '../components/Statistic_Components/Display_Statistics.vue'
-  import axios from 'axios'
+import Display_Statistics from '../components/Statistic_Components/Display_Statistics.vue'
+import axios from 'axios'
 
-  export default {
-    name: 'StatisticView',
-    components: {
-      Display_Statistics
-    },
-    data() {
-      return {
-        APIURL: "https://pokecardbackenduser.azurewebsites.net/api/PokeCardUserDataTrigger?code=G4EYwdemqSVyTjQXzUa1yO2sg4BM8HjuKfHXREFlym-VAzFu7ezVSQ==",
-        username: 'JonasCardsXXX',
-        checkApiData: false,
-        ApiData: {}
-      }
-    },
-    created() {
-        //  created = beim erstellen der Seite im DOM
-      this.getUserData()
-    },
-    methods: {
-      async getUserData() {
-        try {
+export default {
+  name: 'StatisticView',
+  components: {
+    Display_Statistics
+  },
 
-          // API-Aufruf, um die gesammelten Karten von "username" abzurufen.
-          // Wichtig: Funktioniert nur, wenn der Benutzer in der Datenbank existiert, sonst gibt es eine Fehlermeldung.
-          // Daher ist es wichtig sicherzustellen, dass sich der Benutzer anmeldet.
+  data() {
+    return {
+      APIURL:
+        'https://pokecardbackenduser.azurewebsites.net/api/PokeCardUserDataTrigger?code=G4EYwdemqSVyTjQXzUa1yO2sg4BM8HjuKfHXREFlym-VAzFu7ezVSQ==',
+      currentuser: '',
+      checkApiData: false,
+      ApiData: {}
+    }
+  },
 
-            // Axios-Anfrage an die Datenbank für gesammelte Karten.
-          const response = await axios.get(this.APIURL, {
-            params: {
-              username: this.username
-            }
-          })
-            //  Variablen Werte zuweisen
-          this.ApiData = response.data
-          this.checkApiData = true
-        } catch (error) {
-          console.error(error)
-        }
+  mounted() {
+    let VUEXuser = this.$store.getters.getCurrentUser
+    if (VUEXuser == null) {
+      this.currentuser = 'du musst dich anmelden um statistiken zu sehen'
+    } else {
+      this.currentuser = VUEXuser
+      this.getUserData(this.currentuser)
+    }
+  },
+
+  methods: {
+    async getUserData(USER) {
+      console.log('dein API Call wird jetzt gemacht.')
+      try {
+        const response = await axios.get(this.APIURL, { params: { username: USER } })
+        this.ApiData = response.data
+        this.checkApiData = true
+      } catch (error) {
+        console.error(error)
       }
     }
   }
+}
 </script>
-
 <style>
 </style>

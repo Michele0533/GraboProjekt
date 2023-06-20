@@ -8,7 +8,8 @@
       <input type="password" id="password" v-model="password" required>
       <button type="submit">Einloggen</button>
     </form>
-    <p> Example: myuser1234     Passw0rd! </p>
+    <p> users: myuser1234 , TestUserForDemo </p>
+    <p> pw:    Passw0rd! </p>
     <h2>{{ "Status: " + this.message }}</h2>
   </div>
 </template>
@@ -32,14 +33,14 @@ export default {
       if (this.username !== '' && this.password !== '') {
         this.message = "lade..";
 
-        // API Request - Prüfe ob Eingabe korrekt ist.
+          // API Request - Prüfe ob Eingabe korrekt ist.
         axios.get(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
           .then(response => {
             this.message = response.data;
             setTimeout(() => {
               this.$store.dispatch('setCurrentUser', this.username);    // Speichere den aktuell angemeldeten Benutzer global.
               this.$router.go(-1);                                      // Weiterleitung zur vorherigen Seite.
-            }, 1500); // Verzögerung von 1,5 Sekunden
+            }, 1500);                                                   // Verzögerung von 1,5 Sekunden
           })
           .catch(error => {
             this.message = error.response.data; // Fehlermeldung ausgeben.

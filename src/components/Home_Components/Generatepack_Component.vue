@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: blue">
+  <div>
     <button @click="generatePack()">Open a Pack</button>
   </div>
 </template>
@@ -13,47 +13,45 @@ export default {
   props: ["Uapidata"],
   data() {
     return {
+      user: "",
       pack: [],
-      DBindexArray: [], // Here the index of the drawn cards will be stored for the database
+      DBindexArray: [],
       APIURL: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardUserDataTrigger?code=G4EYwdemqSVyTjQXzUa1yO2sg4BM8HjuKfHXREFlym-VAzFu7ezVSQ=='
     };
   },
   methods: {
+      //  Methode um ein pack mit 10 zufälligen karten zu erstellen.
     generatePack() {
-      console.log("working");
       let rand = [];
       let pack = [];
       let indexArray = [];
       for (let i = 0; i < 10; i++) {
         rand[i] = Math.floor(Math.random() * 251);
-        this.DBindexArray[i] = rand[i]; // Add random numbers to the array
+        this.DBindexArray[i] = rand[i];
         pack[i] = this.Uapidata.data[rand[i]];
       }
-
+        //  konsolenausgabe für gezogenen karten & Methode aufrufen
       console.log(pack);
       console.log(this.DBindexArray);
 
-         // Call the method to save the drawn cards
-      this.sendUserdataToDB("JonasCardsXXX", this.DBindexArray);
+        //  user von VUEX abrufen
+      let VUEXuser = this.$store.getters.getCurrentUser;
+      this.user = VUEXuser
+      this.sendUserdataToDB(this.user, this.DBindexArray);
     },
-    DisplayPack() {
-      Text = packs.names;
-    },
-      // Here the API call for saving the data is made
-      //       Funktuniert aktuell einwandfrei.
+
+
+      // Methode um die gezogenen karten in die Datenbank zu Speichern.
     async sendUserdataToDB(username, ArrayData) {
       try {
-        console.log("Jetzt wird der API call zum speichern aufgerufen");
+        console.log("deine gezogenen karten werden jetzt gespeichert, " + this.user);
         const response = await axios.post(this.APIURL, {
           username,
           cards: ArrayData
         });
-        // Speichern der API-Daten im Store
-        store.dispatch('setApiData', response.data);
-
-        console.log('Data successfully sent to the database:', response.data);
+        console.log('Status: ', response.data);
       } catch (error) {
-        console.error('Error while sending data to the database:', error);
+        console.error('Status: ', error);
       }
     }
   }

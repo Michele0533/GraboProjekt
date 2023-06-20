@@ -3,42 +3,36 @@
     <div>
       <img id="logo" :src="logoSrc" />
     </div>
-    <div v-if="getapidata">
+    <div v-if="apiCallFinish">
       <Generatepack_Component :Uapidata="apidata" v-if="!loggedIn" />
-      <button @click="openLoginWindow()">Login</button>
-      <button v-if="(currentuser != 'warte auf log in..')" @click="logout()">Log out</button>
     </div>
     <div v-else>
       Loading API data...
     </div>
   </div>
   <p> aktueller Benutzer: {{ this.currentuser }} </p>
+  <button v-if="(currentuser == 'warte auf log in..')" @click="openLoginWindow()">Login</button>
+  <button v-if="(currentuser != 'warte auf log in..')" @click="logout()">Log out</button>
 </template>
 
 <script>
 import axios from 'axios'
+import { useStore } from 'vuex';
 import Generatepack_Component from './Generatepack_Component.vue'
-import { useStore } from 'vuex';  //  VUEX importieren.
 
 export default {
   name: 'Main_Component',
   components: {
     Generatepack_Component
   },
-  props: {
-    msg: String
-  },
   data() {
     return {
       currentuser: "",
       apidata: [],
-      getapidata: false,
+      apiCallFinish: false,
       logoSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pokémon_Trading_Card_Game_logo.svg/1200px-Pokémon_Trading_Card_Game_logo.svg.png',
       loggedIn: false
     };
-  },
-  computed() {
-    return "Tom"; // Beispielwert, den die berechnete Eigenschaft repräsentiert
   },
   mounted() {
     let VUEXuser = this.$store.getters.getCurrentUser;
@@ -48,28 +42,35 @@ export default {
     } else {
       this.currentuser = VUEXuser;
     }
-    this.fetchData(); // rufe API Call bei Mounted lifecycle auf.
+    this.fetchData();
   },
   methods: {
     async fetchData() {
-      try {
-          //  Api Call für die Pokemon karten
-        const response = await axios.get('https://api.pokemontcg.io/v2/cards');
+      await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
+        //this.$store.dispatch('setApiData', response.data);    // Speichere die Pokemon API daten in VUEX
         this.apidata = response.data;
-        this.getapidata = true;
-      } catch (error) {
+        this.apiCallFinish = true;
+
+      }).catch((error) => {
         console.log(error);
-      }
+      });
     },
+
+//  -----------------------------------------------------------------------------------------------------------------------------------
+//                                                      Methoden für Log in/out
     openLoginWindow() {
-      this.$router.push('/login');
+      this.$router.push('/login');  //  zum Anmelde View weiterleiten (router)
     },
+
     logout() {
-      this.$store.dispatch('setCurrentUser', null); //  log out logik - gespeicherten angemeldeten user auf null setzen.
+      this.$store.dispatch('setCurrentUser', null);   // gespeicherten angemeldeten user auf null setzen.
       console.log("erfolgreich ausgelogt.");
       this.currentuser="warte auf log in.."
       this.loggedIn = false;
     }
+
+//  -----------------------------------------------------------------------------------------------------------------------------------
+ 
   }
 }
 </script>

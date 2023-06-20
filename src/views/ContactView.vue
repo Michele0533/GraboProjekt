@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <h2>Login</h2>
+    <h2>hier ist paltz für eine weitere Funktion der Website </h2>
     <!-- Hier kannst du das Login-Formular erstellen -->
   </div>
 </template>
