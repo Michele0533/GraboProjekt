@@ -38,13 +38,17 @@ export default {
     },
 
     openAnother() {
-      this.$emit('open-another'); // Event auslösen, um ein neues Pack zu öffnen
+      setTimeout(() => {
+        this.$emit('generatePack'); // Event auslösen, um ein neues Pack zu öffnen
+      }, 1000);
     },
+
     splitCardsIntoRows() {
       const pokemonNames = Object.values(this.packlist);
       const numRows = 3;
       const cardsPerRow = Math.ceil(pokemonNames.length / numRows);
 
+      this.cardRows = [];
       let index = 0;
       while (index < pokemonNames.length) {
         const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => pokemon.images.large);
