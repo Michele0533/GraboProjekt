@@ -6,8 +6,8 @@
       </div>
     </div>
     <div class="buttons-container">
-      <button @click="closeOverlay()" class="button">close</button>
-      <button @click="openAnother()" class="button">open anotherone</button>
+      <button @click="closeOverlay()" class="button">Close</button>
+      <button @click="openAnother()" class="button">Open Another One</button>
     </div>
   </div>
 </template>
@@ -23,23 +23,24 @@ export default {
       cardRows: []
     };
   },
-  mounted() {
-    console.log("mounted aufgerufen")
-    this.packlist = this.packs;
-    this.splitCardsIntoRows();
+  watch: {
+    packs: {
+      immediate: true, // Aktualisierung beim Mounten der Komponente
+      handler(newVal) {
+        this.packlist = newVal;
+        this.splitCardsIntoRows();
+      }
+    }
   },
   methods: {
     closeOverlay() {
-        //  hier jetzt logik um die komponente zu beenden
-      this.$parent.closeDisplayCardsOverlay();
+      this.$emit('close'); // Event auslösen, um das Overlay zu schließen
     },
 
-    openAnother(){
-        //  hier jetzt logik für neues Pack 
-      this.$parent.generatePack();
+    openAnother() {
+      this.$emit('open-another'); // Event auslösen, um ein neues Pack zu öffnen
     },
     splitCardsIntoRows() {
-        //  Methode von chat GPT -> alternative wären hardcoded 3 Arrays
       const pokemonNames = Object.values(this.packlist);
       const numRows = 3;
       const cardsPerRow = Math.ceil(pokemonNames.length / numRows);
@@ -56,57 +57,57 @@ export default {
 </script>
 
 <style scoped>
-  .greetings {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    flex-direction: column; /* Änderung: Anordnung in Spalten */
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .image-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column; /* Änderung: Anordnung in Spalten */
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .row {
-    display: flex;
-    margin-bottom: 10px;
-  }
-  
-  .buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3%;
-  }
-  
-  .button {
-    margin: 0 10px;
-  }
-  
-  .pokemon-image {
-    max-width: 220px;
-    margin-right: 10px;
-    transition: transform 0.3s ease;
-  }
-  
-  .pokemon-image:last-child {
-    margin-right: 0;
-  }
-  
-  .pokemon-image:hover {
-    transform: scale(1.1);
-  }
-  </style>
+.greetings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.button {
+  margin: 0 10px;
+}
+
+.pokemon-image {
+  max-width: 220px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.pokemon-image:last-child {
+  margin-right: 0;
+}
+
+.pokemon-image:hover {
+  transform: scale(1.1);
+}
+</style>
