@@ -1,14 +1,20 @@
 <template>
-  <div>
+  <div v-if="currentuser == 'du musst dich anmelden um statistiken zu sehen'">
     <p>{{ currentuser }}</p>
   </div>
-  <div v-if="currentuser !== 'du musst dich anmelden um statistiken zu sehen'">
-    <Display_Statistics v-if="checkApiData" :StatisticApidata="ApiData" />
+  <div v-else>
+    <div v-if="checkApiData">
+      <Display_Statistics :StatisticApidata="ApiData" />
+    </div>
     <div v-else>
-      Userdaten werden von der Datenbank geladen...
+      <div class="loading-container">
+        <p>Userdaten werden von der Datenbank geladen...</p>
+        <!-- Hier kannst du einen Ladeindikator oder ein anderes Ladeelement hinzufügen -->
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 import Display_Statistics from '../components/Statistic_Components/Display_Statistics.vue'
 import axios from 'axios'
@@ -52,5 +58,12 @@ export default {
   },
 }
 </script>
-<style>
+
+<style scoped>
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 </style>

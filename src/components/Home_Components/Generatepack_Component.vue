@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="generatePack()">Open a Pack</button>
+    <button @click="generatePack()" class="open-pack-button">Open a Pack</button>
   </div>
   <div>
     <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible" @close="closeDisplayCardsOverlay" @generatePack="generatePack" />
@@ -73,4 +73,19 @@ export default {
 </script>
 
 <style scoped>
+.open-pack-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #ffcd11;
+  border: none;
+  border-radius: 20px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.open-pack-button:hover {
+  background-color: #ffc400;
+}
 </style>

@@ -1,22 +1,18 @@
 <template>
-  <div>
+  <div class="Main_Component">
     <div class="image-container">
       <img id="logo" :src="imgURL" alt="Logo" />
     </div>
     <div class="button-container">
-
       <div class="api-data-container">
         <div v-if="apiCallFinish">
+          <p> Damit dein Pack gespeichert werden kann, melde dich an </p>
           <Generatepack_Component :Uapidata="apidata" v-if="!loggedIn" />
         </div>
         <div v-else>
           Loading API data...
         </div>
       </div>
-      <button v-if="currentuser === 'warte auf log in..'" @click="openLoginWindow()">Login</button>
-      <button v-else @click="logout()">Log out</button>
-      <button v-if="currentuser === 'warte auf log in..'" @click="openRegisterWindow()">Register</button>
-      <p>aktueller Benutzer: {{ currentuser }}</p>
     </div>
   </div>
 </template>
@@ -51,37 +47,43 @@ export default {
   },
   methods: {
     async fetchData() {
-      await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
-        this.$store.dispatch('setApiData', response.data); 
+      try {
+        const response = await axios.get('https://api.pokemontcg.io/v2/cards');
+        console.log(response.data);
+        this.$store.dispatch('setApiData', response.data);
         this.apidata = response.data;
         this.apiCallFinish = true;
-
-      }).catch((error) => {
+      } catch (error) {
         console.log(error);
-      });
+      }
     },
 
     openLoginWindow() {
-      this.$router.push('/login');  //  zum Anmelde View weiterleiten (router)
+      this.$router.push('/login'); // Redirect to the login view (router)
     },
     logout() {
-      this.$store.dispatch('setCurrentUser', null);   // gespeicherten angemeldeten user auf null setzen.
-      console.log("erfolgreich ausgelogt.");
-      this.currentuser="warte auf log in.."
+      this.$store.dispatch('setCurrentUser', null); // Set the logged-in user to null.
+      console.log("Successfully logged out.");
+      this.currentuser = "warte auf log in..";
       this.loggedIn = false;
     },
     openRegisterWindow() {
-      this.$router.push('/register');  //  zum Anmelde View weiterleiten (router)
+      this.$router.push('/register'); // Redirect to the register view (router)
     },
   }
 }
 </script>
 
-<style>
+<style scoped>
+  .Main_Component {
+    height: 1000px;
+  }
+  
   .image-container {
     float: right;
     width: 40%;
-    padding-top: 5%;
+    padding-top: 2%;
+    padding-right: 5%;
   }
   
   #logo {
@@ -91,10 +93,11 @@ export default {
   
   .button-container {
     height: 100%;
-    background-color: red;
+   /*  background-color: rgba(215, 188, 164, 0.196); */
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    text-align: center; /* Hinzugefügt, um den Inhalt horizontal zu zentrieren */
   }
   </style>
