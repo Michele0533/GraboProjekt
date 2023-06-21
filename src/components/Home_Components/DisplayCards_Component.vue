@@ -1,40 +1,113 @@
 <template>
-    <div class="greetings" style="background-color: beige">
-      <p> DisplayCards_Component - hier werden die gezogenen Pokemon Karten angezeigt. </p>
-      <div class="image-container">
-        <img v-for="pokemon in pokemonNames" :key="pokemon" :src="pokemon" alt="Pokemon Card" class="pokemon-image">
+  <div class="greetings">
+    <div class="image-container">
+      <div class="row" v-for="(row, rowIndex) in cardRows" :key="rowIndex">
+        <img v-for="(card, cardIndex) in row" :key="cardIndex" :src="card" alt="Pokemon Card" class="pokemon-image" :style="{ marginRight: cardIndex !== row.length - 1 ? '10px' : '0' }">
       </div>
     </div>
-  </template>
+    <div class="buttons-container">
+      <button @click="closeOverlay()" class="button">Close</button>
+      <button @click="openAnother()" class="button">Open Another One</button>
+    </div>
+  </div>
+</template>
 
-  <script>
-    //  TODO: hier muss die Logik fürs darstellen der gezogenen Karten implementiert werde. 
+<script>
 export default {
   name: 'DisplayCards_Component',
   props: ["packs"],
   data() {
     return {
-      Text:'',
+      Text: '',
       packlist: {},
-      pokemonNames: []
+      cardRows: []
     };
   },
-  mounted() {
-    this.packlist = this.packs;
-    for (let pokemon in this.packlist) {
-      this.pokemonNames[pokemon] = this.packlist[pokemon].images.large;
+  watch: {
+    packs: {
+      immediate: true, // Aktualisierung beim Mounten der Komponente
+      handler(newVal) {
+        this.packlist = newVal;
+        this.splitCardsIntoRows();
+      }
+    }
+  },
+  methods: {
+    closeOverlay() {
+      this.$emit('close'); // Event auslösen, um das Overlay zu schließen
+    },
+
+    openAnother() {
+      this.$emit('open-another'); // Event auslösen, um ein neues Pack zu öffnen
+    },
+    splitCardsIntoRows() {
+      const pokemonNames = Object.values(this.packlist);
+      const numRows = 3;
+      const cardsPerRow = Math.ceil(pokemonNames.length / numRows);
+
+      let index = 0;
+      while (index < pokemonNames.length) {
+        const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => pokemon.images.large);
+        this.cardRows.push(row);
+        index += cardsPerRow;
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.image-container {
+.greetings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3%;
+}
+
+.button {
+  margin: 0 10px;
 }
 
 .pokemon-image {
-  max-width: 150px;
+  max-width: 220px;
   margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.pokemon-image:last-child {
+  margin-right: 0;
+}
+
+.pokemon-image:hover {
+  transform: scale(1.1);
 }
 </style>

@@ -3,12 +3,12 @@
     <button @click="generatePack()">Open a Pack</button>
   </div>
   <div>
-    <DisplayCards_Component :packs="this.pack" v-if="packGenerated"/>
+    <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible" @close="closeDisplayCardsOverlay"/>
   </div>
 </template>
 
 <script>
-  import DisplayCards_Component from './DisplayCards_Component.vue'
+import DisplayCards_Component from './DisplayCards_Component.vue'
 import axios from 'axios';
 import { useStore } from 'vuex';
 
@@ -20,15 +20,15 @@ export default {
   },
   data() {
     return {
-      packGenerated: false,
+      makeDisplayCardsVisible: false,
       user: "",
       pack: [],
+      packKey: 0, // Initialer Schlüsselwert
       DBindexArray: [],
       APIURL: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardUserDataTrigger?code=G4EYwdemqSVyTjQXzUa1yO2sg4BM8HjuKfHXREFlym-VAzFu7ezVSQ=='
     };
   },
   methods: {
-      //  Methode um ein pack mit 10 zufälligen karten zu erstellen.
     generatePack() {
       let rand = [];
       let pack = [];
@@ -38,34 +38,35 @@ export default {
         this.DBindexArray[i] = rand[i];
         this.pack[i] = this.Uapidata.data[rand[i]];
       }
-        //  konsolenausgabe für gezogenen karten & Methode aufrufen
-      this.packGenerated = true
-      console.log(this.pack);
-      console.log(this.DBindexArray);
 
-        //  user von VUEX abrufen
+      this.makeDisplayCardsVisible = true;
+
       let VUEXuser = this.$store.getters.getCurrentUser;
-      this.user = VUEXuser
-      if(this.user != null){
-         this.sendUserdataToDB(this.user, this.DBindexArray);
+      this.user = VUEXuser;
+      if (this.user != null) {
+        this.sendUserdataToDB(this.user, this.DBindexArray);
       } else {
-        console.log("um die Karten zu speichern musst du dich anmelden")
+        console.log("Um die Karten zu speichern, musst du dich anmelden.");
       }
-     
+
+      this.packKey += 1; // Den Schlüssel aktualisieren, um die Komponente neu zu rendern
     },
 
+    closeDisplayCardsOverlay() {
+      console.log("Parent schließt nun die Ansicht.");
+      this.makeDisplayCardsVisible = false;
+    },
 
-      // Methode um die gezogenen karten in die Datenbank zu Speichern.
     async sendUserdataToDB(username, ArrayData) {
       try {
-        console.log("deine gezogenen karten werden jetzt gespeichert, " + this.user);
+        console.log("Deine gezogenen Karten werden jetzt gespeichert, " + this.user);
         const response = await axios.post(this.APIURL, {
           username,
           cards: ArrayData
         });
-        console.log('Status: ', response.data);
+        console.log('Status:', response.data);
       } catch (error) {
-        console.error('Status: ', error);
+        console.error('Status:', error);
       }
     }
   }
