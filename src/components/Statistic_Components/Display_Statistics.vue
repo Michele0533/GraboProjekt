@@ -1,16 +1,17 @@
 <template>
   <div class="StatisticView">
-    <div>
-      {{ ArrayAllerBisherGezogenenKartenIndexe }}
-    </div>
     <div class="content-container">
       <div class="image-container">
-        <img v-for="(src, index) in allPokemonImages" :key="index" :src="src" :class="{ 'grayscale': !ArrayAllerBisherGezogenenKartenIndexe.includes(index) }" alt="All Pokemon Card" v-on:click="showImageDetails(src)">
+        <img v-for="(src, index) in allPokemonImages" :key="index" :src="src" class="pokemon-image" :class="{ 'grayscale': !ArrayAllerBisherGezogenenKartenIndexe.includes(index) }" alt="All Pokemon Card" @click="showImageDetails(index)">
       </div>
       <div class="sidebar" v-if="selectedImage">
-        <h2>Bild Details</h2>
-        <img :src="selectedImage" alt="Selected Pokemon Card" class="selected-pokemon-image">
-        <!-- Weitere Details oder Informationen zum ausgewählten Bild hier einfügen -->
+        <img :src="selectedImage.images.large" alt="Selected Pokemon Card" class="selected-pokemon-image" style="padding-top: 100px; padding-bottom: 50px;">
+        <p class="textInformationStyle">Name: {{ selectedImage.name }}</p>
+        <p class="textInformationStyle">Type: {{ selectedImage.types[0] }}</p>
+        <p class="textInformationStyle">Attack1: {{ selectedImage.attacks[0].name }}</p>
+        <p class="textInformationStyle">Attack2: {{ selectedImage.attacks[1].name }}</p>
+        <p class="textInformationStyle">Price(avg): {{ selectedImage.cardmarket.prices.averageSellPrice }}</p>
+        <!-- Add more details or information here -->
       </div>
     </div>
   </div>
@@ -54,14 +55,21 @@ export default {
     }
   },
   methods: {
-    showImageDetails(image) {
-      this.selectedImage = image;
+    showImageDetails(index) {
+      console.log( this.selectedImage)
+      this.selectedImage = this.allPokemonCards[index];
     }
   }
 }
 </script>
 
 <style scoped>
+
+.textInformationStyle {
+  padding-top: 15px;
+  text-align: center;
+}
+
 .content-container {
   display: flex;
 }
@@ -74,6 +82,7 @@ export default {
 }
 
 .pokemon-image {
+  max-width: 200px;
   margin: 10px;
   transition: transform 0.3s ease; /* Übergangseffekt definieren */
 }
@@ -83,13 +92,19 @@ export default {
 }
 
 .sidebar {
-  width: 300px;
+  width: 20%;
   padding: 10px;
   background-color: #f0f0f0;
+  border: 3px solid red;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 .selected-pokemon-image {
-  max-width: 100%;
+  max-width: 70%;
+  margin: 0 auto; /* Mittig zentrierte Ausrichtung */
+  display: block; /* Element als Blockelement anzeigen */
   margin-bottom: 10px;
 }
 

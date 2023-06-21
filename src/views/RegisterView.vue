@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div class="register-overlay">
     <h2>Register</h2>
-    <form @submit.prevent="Register">
+    <form @submit.prevent="register">
       <label for="username">Benutzername:</label>
       <input type="text" id="username" v-model="username" required>
       <label for="password">Passwort:</label>
       <input type="password" id="password" v-model="password" required>
-      <button type="submit">register</button>
+      <button type="submit">Register</button>
     </form>
     <h2>{{ "Status: " + this.message }}</h2>
+    <button @click="exitCurrentRouterView()"> Zurück </button>
   </div>
-  
 </template>
 
 <script>
@@ -22,23 +22,23 @@ export default {
     return {
       url: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardLogInTrigger',
       code: 'zzrkFoLkMlBkIcx5qvEBifZzzoxnczy5_rRUGAGpc0k5AzFuplGmMg==',
-      message: "warte auf Log In",
+      message: "warte auf Registrierung",
       username: '',
       password: '',
     };
   },
   methods: {
-    Register() {
+    register() {
       if (this.username !== '' && this.password !== '') {
         this.message = "lade..";
 
-          // API Request - Prüfe ob Eingabe korrekt ist.
+        // API Request - Prüfe ob Eingabe korrekt ist.
         axios.post(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
           .then(response => {
             this.message = response.data;
             setTimeout(() => {
               this.$store.dispatch('setCurrentUser', this.username);    // Speichere den aktuell angemeldeten Benutzer global.
-              this.$router.go(-1);                                      // Weiterleitung zur vorherigen Seite.
+              this.exitCurrentRouterView()                              // Weiterleitung zur vorherigen Seite.
             }, 1500);                                                   // Verzögerung von 1,5 Sekunden
           })
           .catch(error => {
@@ -46,7 +46,27 @@ export default {
             alert(error.response.data);
           });
       }
+    },
+    exitCurrentRouterView(){
+      this.$router.go(-1);
     }
   }
 };
 </script>
+
+<style scoped>
+.register-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
