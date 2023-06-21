@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     generatePack() {
-      console.log("generatePack() aufgerufen")
       let rand = [];
       let pack = [];
       let indexArray = [];
@@ -54,7 +53,6 @@ export default {
     },
 
     closeDisplayCardsOverlay() {
-      console.log("Parent schließt nun die Ansicht.");
       this.makeDisplayCardsVisible = false;
     },
 
