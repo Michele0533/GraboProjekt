@@ -3,7 +3,7 @@
     <button @click="generatePack()">Open a Pack</button>
   </div>
   <div>
-    <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible" @close="closeDisplayCardsOverlay"/>
+    <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible" @close="closeDisplayCardsOverlay" @generatePack="generatePack" />
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     generatePack() {
+      console.log("generatePack() aufgerufen")
       let rand = [];
       let pack = [];
       let indexArray = [];
