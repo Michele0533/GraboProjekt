@@ -41,7 +41,6 @@ export default {
 
   methods: {
     async getUserData(USER) {
-      console.log('dein API Call wird jetzt gemacht.')
       try {
         const response = await axios.get(this.APIURL, { params: { username: USER } })
         this.ApiData = response.data
@@ -50,7 +49,7 @@ export default {
         console.error(error)
       }
     }
-  }
+  },
 }
 </script>
 <style>

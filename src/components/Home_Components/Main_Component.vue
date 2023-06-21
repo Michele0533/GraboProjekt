@@ -13,6 +13,7 @@
   <p> aktueller Benutzer: {{ this.currentuser }} </p>
   <button v-if="(currentuser == 'warte auf log in..')" @click="openLoginWindow()">Login</button>
   <button v-if="(currentuser != 'warte auf log in..')" @click="logout()">Log out</button>
+  <button v-if="(currentuser == 'warte auf log in..')" @click="openRegisterWindow()">Register</button>
 </template>
 
 <script>
@@ -36,7 +37,6 @@ export default {
   },
   mounted() {
     let VUEXuser = this.$store.getters.getCurrentUser;
-    console.log("aktueller User: ", VUEXuser);
     if (VUEXuser == null) {
       this.currentuser = "warte auf log in.."
     } else {
@@ -47,7 +47,7 @@ export default {
   methods: {
     async fetchData() {
       await axios.get('https://api.pokemontcg.io/v2/cards').then((response) => {
-        console.log(response.data)
+        this.$store.dispatch('setApiData', response.data); 
         this.apidata = response.data;
         this.apiCallFinish = true;
 
@@ -67,7 +67,10 @@ export default {
       console.log("erfolgreich ausgelogt.");
       this.currentuser="warte auf log in.."
       this.loggedIn = false;
-    }
+    },
+    openRegisterWindow() {
+      this.$router.push('/register');  //  zum Anmelde View weiterleiten (router)
+    },
 
 //  -----------------------------------------------------------------------------------------------------------------------------------
  
