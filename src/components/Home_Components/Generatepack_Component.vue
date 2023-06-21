@@ -3,12 +3,12 @@
     <button @click="generatePack()">Open a Pack</button>
   </div>
   <div>
-    <DisplayCards_Component :packs="this.pack" v-if="packGenerated"/>
+    <DisplayCards_Component :packs="this.pack" v-if="makeDisplayCardsVisible"/>
   </div>
 </template>
 
 <script>
-  import DisplayCards_Component from './DisplayCards_Component.vue'
+import DisplayCards_Component from './DisplayCards_Component.vue'
 import axios from 'axios';
 import { useStore } from 'vuex';
 
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      packGenerated: false,
+      makeDisplayCardsVisible: false,
       user: "",
       pack: [],
       DBindexArray: [],
@@ -39,9 +39,8 @@ export default {
         this.pack[i] = this.Uapidata.data[rand[i]];
       }
         //  konsolenausgabe für gezogenen karten & Methode aufrufen
-      this.packGenerated = true
+      this.makeDisplayCardsVisible = true
       console.log(this.pack);
-      console.log(this.DBindexArray);
 
         //  user von VUEX abrufen
       let VUEXuser = this.$store.getters.getCurrentUser;
@@ -51,9 +50,12 @@ export default {
       } else {
         console.log("um die Karten zu speichern musst du dich anmelden")
       }
-     
     },
-
+    
+    closeDisplayCardsOverlay(){
+      console.log("parent schließt nun das view.")
+      this.makeDisplayCardsVisible = false
+    },
 
       // Methode um die gezogenen karten in die Datenbank zu Speichern.
     async sendUserdataToDB(username, ArrayData) {
