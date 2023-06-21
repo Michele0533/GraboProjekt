@@ -2,7 +2,7 @@
   <div class="greetings">
     <div class="image-container">
       <div class="row" v-for="(row, rowIndex) in cardRows" :key="rowIndex">
-        <img v-for="(card, cardIndex) in row" :key="cardIndex" :src="card" alt="Pokemon Card" class="pokemon-image" :style="{ marginRight: cardIndex !== row.length - 1 ? '10px' : '0' }">
+        <img v-for="(card, cardIndex) in row" :key="cardIndex" :src="card" alt="Pokemon Card" class="pokemon-image" :style="{ marginRight: cardIndex !== row.length - 1 ? '30px' : '0' }">
       </div>
     </div>
     <div class="buttons-container">
@@ -87,7 +87,7 @@ export default {
 
 .row {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .buttons-container {

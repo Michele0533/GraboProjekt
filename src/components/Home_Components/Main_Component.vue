@@ -82,7 +82,6 @@ export default {
     float: right;
     width: 40%;
     padding-top: 5%;
-    background-color: blue;
   }
   
   #logo {
