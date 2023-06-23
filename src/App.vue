@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="background">
     <header>
       <nav style="display: flex; justify-content: space-between; align-items: center;">
         <div class="logo-container">
-          <img class="logo" src="https://fontmeme.com/permalink/230621/36f8ffb42ae255c9a5bc8453125e2037.png" alt="no Picture" />
+          <img class="logo" src="https://cdn.discordapp.com/attachments/1074826548235993148/1121555724292608101/073EE5AF-698E-4CA0-BD00-F0AADC5A0226.PNG" alt="no Picture" />
         </div>
 
         <div class="nav-links">
           <RouterLink class="nav-link" to="/">Home</RouterLink>
-          <RouterLink class="nav-link" to="/statistic">Statistic</RouterLink>
-          <RouterLink class="nav-link" to="/contact">Contact</RouterLink>
+          <RouterLink class="nav-link" to="/statistic">Pokedex</RouterLink>
+          <RouterLink class="nav-link" to="/contact">SpielerKarte</RouterLink>
 
           <div class="auth-buttons">
             <h2> {{ currentuser }} </h2>
@@ -139,5 +139,13 @@ nav a:not(:last-of-type)::after {
 .pokemon-button:active {
   background-color: #b74a07;
   transform: translateY(1px);
+}
+
+.background {
+  background-image: url("https://www.wallpapertip.com/wmimgs/70-704405_amazing-hd-enchanted-forest-enchanted-forest-wallpaper-hd.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 </style>

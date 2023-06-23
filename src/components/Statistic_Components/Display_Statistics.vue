@@ -72,6 +72,7 @@ export default {
 
 .content-container {
   display: flex;
+  height: 100vh; /* Set a fixed height for the container */
 }
 
 .image-container {
@@ -79,6 +80,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: auto; /* Add this line to enable scrolling */
 }
 
 .pokemon-image {
@@ -99,6 +101,7 @@ export default {
   border-radius: 10px;
   margin-top: 20px;
   margin-right: 20px;
+  overflow-y: auto; /* Add this line to enable scrolling */
 }
 
 .selected-pokemon-image {
