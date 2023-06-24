@@ -14,9 +14,9 @@ export default {
 
 <style scoped>
 .login-container {
-  height: 100vh;
-  display: flex;
+  height: 800px;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 </style>

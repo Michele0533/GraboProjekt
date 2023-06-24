@@ -22,7 +22,7 @@
       <button @click="exitCurrentRouterView()">Zurück</button>
     </div>
     <div class="login-fame-picture">
-      <img src="https://wallpapercave.com/wp/wp2408447.png" class="login-image" />
+      <img src="https://i0.wp.com/mynintendonews.com/wp-content/uploads/2019/10/gigantamax-charizard-marketing-art.png?fit=709%2C792&ssl=1" class="login-image" />
     </div>
   </div>
 </template>
@@ -84,20 +84,6 @@ export default {
   align-items: center;
 }
 
-.login-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  z-index: 2;
-  background-color: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .login-container {
   justify-content: center;
   align-items: center;
@@ -122,9 +108,8 @@ export default {
 }
 
 .login-image {
-  width: 220px;
-  height: 220px;
+  width: 450px;
+  height: 450px;
   object-fit: cover;
-  
 }
 </style>

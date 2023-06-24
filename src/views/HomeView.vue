@@ -19,10 +19,5 @@ export default {
 </script>
 
 <style>
-  body {
-    background-image: url("https://wallpapers.com/images/hd/pokemon-inside-an-enchanted-forest-9cxmmzhqfrt3301l.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  
 </style>

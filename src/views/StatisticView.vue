@@ -1,8 +1,8 @@
 <template>
-  <div v-if="currentuser == 'du musst dich anmelden um statistiken zu sehen'">
+  <div class="test" v-if="currentuser == 'du musst dich anmelden um statistiken zu sehen'">
     <p>{{ currentuser }}</p>
   </div>
-  <div v-else>
+  <div class="test" v-else>
     <div v-if="checkApiData">
       <Display_Statistics :StatisticApidata="ApiData" />
     </div>
@@ -66,4 +66,12 @@ export default {
   align-items: center;
   height: 100%;
 }
+
+.test{
+  height: 800px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 </style>

@@ -14,7 +14,7 @@
           <div class="auth-buttons">
             <h2> {{ currentuser }} </h2>
             <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button" @click="logout()">Log out</button>
-            <button v-else class="pokemon-button login-button" @click="openLoginWindow()">Login</button>
+            <button v-else class="pokemon-button login-button" @click="openLoginWindow()" >Login</button>
             <button v-if="currentuser === 'warte auf log in..'" class="pokemon-button register-button" @click="openRegisterWindow()">Register</button>
           </div>
         </div>
@@ -76,7 +76,7 @@
 }
   </script>
 
-<style scoped>
+<style>
 .logo {
   max-width: 300px; /* Ändern Sie den Wert auf die gewünschte Größe */
   padding-left: 50px;
@@ -88,7 +88,7 @@
   margin-right: 3%;
   display: flex;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .auth-buttons {
@@ -102,6 +102,15 @@
   text-decoration: none;
   color: #f88c1c;
   font-family: 'Pokemon', sans-serif;
+}
+
+#Nav-Buttons:hover {
+  background-color: #e36209;
+}
+
+#Nav-Buttons:active {
+  background-color: #b74a07;
+  transform: translateY(1px);
 }
 
 #Nav-Buttons{
@@ -147,6 +156,22 @@
   transform: translateY(1px);
 }
 
+body{
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+}
+
+.background {
+    background-image: url("https://wallpapers.com/images/hd/pokemon-inside-an-enchanted-forest-9cxmmzhqfrt3301l.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
 
 

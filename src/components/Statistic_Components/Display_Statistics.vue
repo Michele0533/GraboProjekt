@@ -70,7 +70,7 @@ export default {
 
 .content-container {
   display: flex;
-  height: 100vh; /* Set a fixed height for the container */
+  height: 100vh; 
 }
 
 .image-container {
@@ -78,9 +78,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-y: scroll; /* Enable scrolling */
-  scrollbar-width: none; /* Hide the scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide the scrollbar for IE and Edge */
+  overflow-y: scroll; 
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
 }
 
 .image-container::-webkit-scrollbar {
