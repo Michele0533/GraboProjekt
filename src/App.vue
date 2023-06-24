@@ -7,9 +7,9 @@
         </div>
 
         <div class="nav-links">
-          <RouterLink class="nav-link" to="/">Home</RouterLink>
-          <RouterLink class="nav-link" to="/statistic">Pokedex</RouterLink>
-          <RouterLink class="nav-link" to="/contact">SpielerKarte</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/">Home</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Pokedex</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">SpielerKarte</RouterLink>
 
           <div class="auth-buttons">
             <h2> {{ currentuser }} </h2>
@@ -88,16 +88,11 @@
   margin-right: 3%;
   display: flex;
   align-items: center;
+  border-radius: 5px;
 }
 
 .auth-buttons {
   margin-left: 50px; /* Fügen Sie 50px linken Rand hinzu */
-}
-
-nav a:not(:last-of-type)::after {
-  content: "|";
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .nav-link {
@@ -107,6 +102,17 @@ nav a:not(:last-of-type)::after {
   text-decoration: none;
   color: #f88c1c;
   font-family: 'Pokemon', sans-serif;
+}
+
+#Nav-Buttons{
+  font-size: 17px;
+  padding: 10px 20px;
+  background-color: #f88c1c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Pokemon', sans-serif;
+  cursor: pointer;
 }
 
 .pokemon-button {
@@ -141,11 +147,7 @@ nav a:not(:last-of-type)::after {
   transform: translateY(1px);
 }
 
-.background {
-  background-image: url("https://www.wallpapertip.com/wmimgs/70-704405_amazing-hd-enchanted-forest-enchanted-forest-wallpaper-hd.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
+
+
+
 </style>

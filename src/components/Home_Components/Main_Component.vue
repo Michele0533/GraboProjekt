@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
   .Main_Component {
-    height: 1000px;
+    height: 800px;
   }
   
   .image-container {

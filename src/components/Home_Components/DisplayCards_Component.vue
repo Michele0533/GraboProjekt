@@ -97,6 +97,7 @@ export default {
     justify-content: center;
     align-items: center;
     margin-bottom: 3%;
+
   }
   
   .button {
@@ -122,7 +123,7 @@ export default {
   }
   
   .pokemon-image {
-    max-width: 220px;
+    max-width: 150px;
     margin-right: 10px;
     transition: transform 0.3s ease;
   }
