@@ -6,7 +6,7 @@
     <div class="button-container">
       <div class="api-data-container">
         <div v-if="apiCallFinish">
-          <p> Damit dein Pack gespeichert werden kann, melde dich an </p>
+          <p style="color: white;"> Damit dein Pack gespeichert werden kann, melde dich an </p>
           <Generatepack_Component :Uapidata="apidata" v-if="!loggedIn" />
         </div>
         <div v-else>
