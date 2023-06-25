@@ -83,9 +83,7 @@ export default {
 <style>
 .logo {
   max-width: 300px;
-  /* Ändern Sie den Wert auf die gewünschte Größe */
   padding-left: 50px;
-  /* Zusätzliche CSS-Eigenschaften für die Gestaltung des Logos */
 }
 
 .nav-links {
@@ -103,7 +101,6 @@ export default {
   margin-right: 3%;
   font-size: 20px;
   margin-right: 10px;
-  /* Ändern Sie den Wert auf den gewünschten Abstand */
   text-decoration: none;
   color: #f88c1c;
   font-family: 'Pokemon', sans-serif;

@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <script>
 import DisplayCards_Component from './DisplayCards_Component.vue'
 import axios from 'axios';
@@ -36,12 +35,17 @@ export default {
   methods: {
     generatePack() {
       let rand = [];
+      let newPack = [];
       for (let i = 0; i < 10; i++) {
         rand[i] = Math.floor(Math.random() * 251);
         this.DBindexArray[i] = rand[i];
         this.pack[i] = this.Uapidata.data[rand[i]];
+        newPack.push(this.Uapidata.data[rand[i]]);
       }
-      //hoch geben an eltern component
+
+      const packKey = Object.keys(this.$store.getters.getPackData).length + 1;
+      this.$store.dispatch('addPack', { packKey, pack: newPack });
+
       this.$emit('generatedPack', this.pack);
       this.makeDisplayCardsVisible = true;
 
