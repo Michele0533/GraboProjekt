@@ -1,19 +1,32 @@
 <template>
   <div class="login-overlay">
-    <h2>Login</h2>
-    <form @submit.prevent="login">
-      <label for="username">Benutzername:</label>
-      <input type="text" id="username" v-model="username" required>
-      <label for="password">Passwort:</label>
-      <input type="password" id="password" v-model="password" required>
-      <button type="submit">Einloggen</button>
-    </form>
-    <p> users: myuser1234 , TestUserForDemo </p>
-    <p> pw:    Passw0rd! </p>
-    <h2>{{ "Status: " + this.message }}</h2>
-    <button @click="exitCurrentRouterView()"> Zurück </button>
+    <div class="login-container">
+    </div>
+    <div class="login-frame">
+      
+      <h2>Login</h2>
+      <div class="user-Eingabe">
+        <label for="username">Benutzername:</label>
+        <input type="text" id="username" v-model="username" required>
+      </div>
+      <div class="user-Eingabe">
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <form @submit.prevent="login">
+        <button type="submit">Einloggen</button>
+      </form>
+      <p>users: myuser1234, TestUserForDemo</p>
+      <p>pw: Passw0rd!</p>
+      <h2>{{ "Status: " + this.message }}</h2>
+      <button @click="exitCurrentRouterView()">Zurück</button>
+    </div>
+    <div class="login-fame-picture">
+      <img src="https://i0.wp.com/mynintendonews.com/wp-content/uploads/2019/10/gigantamax-charizard-marketing-art.png?fit=709%2C792&ssl=1" class="login-image" />
+    </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -67,8 +80,36 @@ export default {
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.8);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.login-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.user-Eingabe {
+  margin-bottom: 10px;
+}
+
+.login-frame {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  margin-left: 200px;
+}
+
+.login-fame-picture {
+  justify-content: center;
+  align-items: center;
+}
+
+.login-image {
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
 }
 </style>

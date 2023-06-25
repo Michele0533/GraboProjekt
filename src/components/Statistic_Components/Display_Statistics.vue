@@ -2,16 +2,17 @@
   <div class="StatisticView">
     <div class="content-container">
       <div class="image-container">
-        <img v-for="(src, index) in allPokemonImages" :key="index" :src="src" class="pokemon-image" :class="{ 'grayscale': !ArrayAllerBisherGezogenenKartenIndexe.includes(index) }" alt="All Pokemon Card" @click="showImageDetails(index)">
+        <img v-for="(src, index) in allPokemonImages" :key="index" :src="src" class="pokemon-image"
+          :class="{ 'grayscale': !ArrayAllerBisherGezogenenKartenIndexe.includes(index) }" alt="All Pokemon Card"
+          @click="showImageDetails(index)">
       </div>
       <div class="sidebar" v-if="selectedImage">
-        <img :src="selectedImage.images.large" alt="Selected Pokemon Card" class="selected-pokemon-image" style="padding-top: 100px; padding-bottom: 50px;">
+        <img :src="selectedImage.images.large" alt="Selected Pokemon Card" class="selected-pokemon-image"
+          style="padding-top: 10%; padding-bottom: 50px;">
         <p class="textInformationStyle">Name: {{ selectedImage.name }}</p>
         <p class="textInformationStyle">Type: {{ selectedImage.types[0] }}</p>
-        <p class="textInformationStyle">Attack1: {{ selectedImage.attacks[0].name }}</p>
-        <p class="textInformationStyle">Attack2: {{ selectedImage.attacks[1].name }}</p>
-        <p class="textInformationStyle">Price(avg): {{ selectedImage.cardmarket.prices.averageSellPrice }}</p>
-        <!-- Add more details or information here -->
+        <p class="textInformationStyle">Price(low): {{ selectedImage.cardmarket.prices.lowPrice }}€</p>
+        <p class="textInformationStyle">Price(avg30): {{ selectedImage.cardmarket.prices.avg30 }}€</p>
       </div>
     </div>
   </div>
@@ -56,7 +57,7 @@ export default {
   },
   methods: {
     showImageDetails(index) {
-      console.log( this.selectedImage)
+      console.log(this.selectedImage)
       this.selectedImage = this.allPokemonCards[index];
     }
   }
@@ -64,14 +65,16 @@ export default {
 </script>
 
 <style scoped>
-
 .textInformationStyle {
   padding-top: 15px;
   text-align: center;
 }
 
+
+
 .content-container {
   display: flex;
+
 }
 
 .image-container {
@@ -79,36 +82,51 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 80vh;
+}
+
+.image-container::-webkit-scrollbar {
+  display: none;
+  /* Hide the scrollbar for Chrome, Safari, and Opera */
 }
 
 .pokemon-image {
-  max-width: 200px;
+  max-width: 15%;
   margin: 10px;
-  transition: transform 0.3s ease; /* Übergangseffekt definieren */
+  transition: transform 0.3s ease;
+  /* Übergangseffekt definieren */
 }
 
 .pokemon-image:hover {
-  transform: scale(1.1); /* Stiländerung bei Hover */
+  transform: scale(1.1);
+  /* Stiländerung bei Hover */
 }
 
 .sidebar {
   width: 20%;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: 3px solid red;
+  padding: 5px;
+  border: 1px solid rgb(252, 204, 0);
+  backdrop-filter: brightness(60%);
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 0px;
   margin-right: 20px;
+  overflow-y: auto;
+  height: 75vh;
+  scrollbar-width: none;
 }
 
 .selected-pokemon-image {
-  max-width: 70%;
-  margin: 0 auto; /* Mittig zentrierte Ausrichtung */
-  display: block; /* Element als Blockelement anzeigen */
+  max-width: 60%;
+  margin: 0 auto;
+  /* Mittig zentrierte Ausrichtung */
+  display: block;
+  /* Element als Blockelement anzeigen */
   margin-bottom: 10px;
 }
 
 .grayscale {
-  filter: grayscale(100%);
+  filter: invert(42%);
 }
 </style>

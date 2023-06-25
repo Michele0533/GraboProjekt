@@ -1,14 +1,14 @@
 <template>
-  <div v-if="currentuser == 'du musst dich anmelden um statistiken zu sehen'">
-    <p>{{ currentuser }}</p>
+  <div class="test" v-if="currentuser == 'Please Log in to see your collected Cards'">
+    <h1 id="currentuser">{{ currentuser }}</h1>
   </div>
-  <div v-else>
+  <div class="test" v-else>
     <div v-if="checkApiData">
       <Display_Statistics :StatisticApidata="ApiData" />
     </div>
     <div v-else>
       <div class="loading-container">
-        <p>Userdaten werden von der Datenbank geladen...</p>
+        <h1 id="LoadingData">Retrieving your Information</h1>
         <!-- Hier kannst du einen Ladeindikator oder ein anderes Ladeelement hinzufügen -->
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
   mounted() {
     let VUEXuser = this.$store.getters.getCurrentUser
     if (VUEXuser == null) {
-      this.currentuser = 'du musst dich anmelden um statistiken zu sehen'
+      this.currentuser = 'Please Log in to see your collected Cards'
     } else {
       this.currentuser = VUEXuser
       this.getUserData(this.currentuser)
@@ -65,5 +65,24 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.test {
+  height: 800px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#LoadingData {
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px #000000;
+}
+
+#currentuser {
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px #000000;
 }
 </style>
