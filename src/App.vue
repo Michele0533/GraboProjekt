@@ -3,24 +3,28 @@
     <header>
       <nav style="display: flex; justify-content: space-between; align-items: center;">
         <div class="logo-container">
-          <img class="logo" src="https://cdn.discordapp.com/attachments/1074826548235993148/1121555724292608101/073EE5AF-698E-4CA0-BD00-F0AADC5A0226.PNG" alt="no Picture" />
+          <img class="logo"
+            src="https://cdn.discordapp.com/attachments/1074826548235993148/1121555724292608101/073EE5AF-698E-4CA0-BD00-F0AADC5A0226.PNG"
+            alt="no Picture" />
         </div>
 
         <div class="nav-links">
           <RouterLink id="Nav-Buttons" class="nav-link" to="/">Home</RouterLink>
-          <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Pokedex</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Inventory</RouterLink>
           <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">SpielerKarte</RouterLink>
 
           <div class="auth-buttons">
-            <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button" @click="logout()">Log out</button>
-            <button v-else class="pokemon-button login-button" @click="openLoginWindow()" >Login</button>
-            <button v-if="currentuser === 'warte auf log in..'" class="pokemon-button register-button" @click="openRegisterWindow()">Register</button>
+            <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button"
+              @click="logout()">Logout</button>
+            <button v-else class="pokemon-button login-button" @click="openLoginWindow()">Login</button>
+            <button v-if="currentuser === 'warte auf log in..'" class="pokemon-button register-button"
+              @click="openRegisterWindow()">Register</button>
             <h2 id="currentuser"> {{ currentuser }} </h2>
           </div>
         </div>
 
       </nav>
-    </header> 
+    </header>
     <main>
       <RouterView />
     </main>
@@ -28,29 +32,29 @@
 </template>
 
 <script>
-  import { RouterLink, RouterView } from 'vue-router'
-  import axios from 'axios'
-  import { useStore } from 'vuex';
-  
-  export default {
-    components: {
-      RouterLink,
-      RouterView
-    },
-    data() {
-      return {
-        currentuser: 'warte auf log in..'
-      }
-    },
-    mounted() {
-      this.fetchData();
-    },
-    watch: {
-      '$store.getters.getCurrentUser'(newUser) {
-        this.currentuser = newUser || 'warte auf log in..';
-      }
-    },
-    methods: {
+import { RouterLink, RouterView } from 'vue-router'
+import axios from 'axios'
+import { useStore } from 'vuex';
+
+export default {
+  components: {
+    RouterLink,
+    RouterView
+  },
+  data() {
+    return {
+      currentuser: 'warte auf log in..'
+    }
+  },
+  mounted() {
+    this.fetchData();
+  },
+  watch: {
+    '$store.getters.getCurrentUser'(newUser) {
+      this.currentuser = newUser || 'warte auf log in..';
+    }
+  },
+  methods: {
     async fetchData() {
       try {
         const response = await axios.get('https://api.pokemontcg.io/v2/cards');
@@ -74,11 +78,12 @@
     }
   }
 }
-  </script>
+</script>
 
 <style>
 .logo {
-  max-width: 300px; /* Ändern Sie den Wert auf die gewünschte Größe */
+  max-width: 300px;
+  /* Ändern Sie den Wert auf die gewünschte Größe */
   padding-left: 50px;
   /* Zusätzliche CSS-Eigenschaften für die Gestaltung des Logos */
 }
@@ -97,7 +102,8 @@
 .nav-link {
   margin-right: 3%;
   font-size: 20px;
-  margin-right: 10px; /* Ändern Sie den Wert auf den gewünschten Abstand */
+  margin-right: 10px;
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
   text-decoration: none;
   color: #f88c1c;
   font-family: 'Pokemon', sans-serif;
@@ -112,14 +118,15 @@
   transform: translateY(1px);
 }
 
-#Nav-Buttons{
+#Nav-Buttons {
   font-size: 17px;
   padding: 10px 20px;
-  background-color: #f88c1c;
+  background-color: rgb(252, 204, 0);
   color: #ffffff;
   border: none;
   border-radius: 5px;
   font-family: 'Pokemon', sans-serif;
+  color: rgb((0 117 190));
   cursor: pointer;
 }
 
@@ -140,7 +147,9 @@
   border: none;
   border-radius: 5px;
   font-family: 'Pokemon', sans-serif;
-  cursor: pointer; /* Ändern Sie den Wert auf den gewünschten Abstand */
+  cursor: pointer;
+  background-color: rgb(252, 204, 0);
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
 }
 
 .logout-button {
@@ -149,7 +158,10 @@
   border: none;
   border-radius: 5px;
   font-family: 'Pokemon', sans-serif;
-  cursor: pointer; /* Ändern Sie den Wert auf den gewünschten Abstand */ /* Ändern Sie den Wert auf den gewünschten Abstand */
+  cursor: pointer;
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
+
 }
 
 .register-button {
@@ -158,8 +170,11 @@
   border: none;
   border-radius: 5px;
   font-family: 'Pokemon', sans-serif;
-  cursor: pointer; /* Ändern Sie den Wert auf den gewünschten Abstand */ /* Ändern Sie den Wert auf den gewünschten Abstand */
-   /* Ändern Sie den Wert auf den gewünschten Abstand */
+  cursor: pointer;
+  background-color: rgb(252, 204, 0);
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
+  /* Ändern Sie den Wert auf den gewünschten Abstand */
 }
 
 .pokemon-button:hover {
@@ -171,7 +186,7 @@
   transform: translateY(1px);
 }
 
-body{
+body {
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -180,18 +195,17 @@ body{
 }
 
 .background {
-    background-image: url("https://wallpapers.com/images/hd/pokemon-inside-an-enchanted-forest-9cxmmzhqfrt3301l.jpg");
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-#currentuser{
+  background-image: url("https://wallpapers.com/images/hd/pokemon-inside-an-enchanted-forest-9cxmmzhqfrt3301l.jpg");
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#currentuser {
   color: white;
   text-align: center;
   text-shadow: 2px 2px #000000;
 }
-
-
 </style>

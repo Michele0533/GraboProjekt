@@ -9,10 +9,10 @@
       <div class="sidebar" v-if="selectedImage">
         <img :src="selectedImage.images.large" alt="Selected Pokemon Card" class="selected-pokemon-image"
           style="padding-top: 10%; padding-bottom: 50px;">
-        <p class="textInformationStyle">Name: {{ selectedImage.name }}</p>
-        <p class="textInformationStyle">Type: {{ selectedImage.types[0] }}</p>
-        <p class="textInformationStyle">Price(low): {{ selectedImage.cardmarket.prices.lowPrice }}€</p>
-        <p class="textInformationStyle">Price(avg30): {{ selectedImage.cardmarket.prices.avg30 }}€</p>
+        <div class="textInformationStyle">Name: {{ selectedImage.name }}</div>
+        <div class="textInformationStyle">Type: {{ selectedImage.types[0] }}</div>
+        <div class="textInformationStyle">Price(low): {{ selectedImage.cardmarket.prices.lowPrice }}€</div>
+        <div class="textInformationStyle">Price(avg30): {{ selectedImage.cardmarket.prices.avg30 }}€</div>
       </div>
     </div>
   </div>
@@ -66,11 +66,18 @@ export default {
 
 <style scoped>
 .textInformationStyle {
-  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
   text-align: center;
+  width: 50%;
+  height: 5%;
+  margin: 5px auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  font-family: 'Pokemon', sans-serif;
 }
-
-
 
 .content-container {
   display: flex;
@@ -93,7 +100,7 @@ export default {
 }
 
 .pokemon-image {
-  max-width: 15%;
+  width: 15%;
   margin: 10px;
   transition: transform 0.3s ease;
   /* Übergangseffekt definieren */
