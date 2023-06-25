@@ -1,5 +1,5 @@
 <template>
-  <div class="image-container">
+  <div class="history">
     <div class="row" v-for="(row, rowIndex) in cardRows" :key="rowIndex">
       <img v-for="(card, cardIndex) in row" :key="cardIndex" :src="card" alt="Pokemon Card" class="pokemon-image"
         :style="{ marginRight: cardIndex !== row.length - 1 ? '30px' : '0' }">
@@ -35,14 +35,16 @@ export default {
   transform: scale(1.1);
 }
 
-.image-container {
+.history {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
-  background-color: red;
+  margin-left: 6%;
+  margin-top: 5%;
+  margin-bottom: 0px;
+  /*background-color: red;*/
 }
 
 .row {
@@ -51,7 +53,7 @@ export default {
 }
 
 .pokemon-image {
-  max-width: 75px;
+  max-width: 15%;
   margin-right: 10px;
   transition: transform 0.3s ease;
 }

@@ -6,14 +6,16 @@
     <div class="button-container">
       <div class="api-data-container">
         <div v-if="apiCallFinish">
-          <h1 id="SaveCard"> Damit dein Pack gespeichert werden kann, melde dich an </h1>
+          <h1 id="SaveCard"> Log in to save your pulled cards </h1>
           <Generatepack_Component :Uapidata="apidata" v-if="!loggedIn" @generatedPack="receiveGeneratedPack" />
-          <DisplayLastTenCards :uLastCards="lastTenCards" v-if="this.lastTenCardsData" @close="closeOverlay" />
         </div>
         <div v-else>
           <h1 id="SaveCard"> Loading API data...</h1>
         </div>
       </div>
+    </div>
+    <div>
+      <DisplayLastTenCards :uLastCards="lastTenCards" v-if="this.lastTenCardsData" @close="closeOverlay" />
     </div>
   </div>
 </template>
@@ -105,12 +107,13 @@ export default {
 }
 
 .button-container {
-  height: 100%;
+  height: 25%;
   /*  background-color: rgba(215, 188, 164, 0.196); */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 0%;
+  margin-left: 0%;
   text-align: center;
   /* Hinzugefügt, um den Inhalt horizontal zu zentrieren */
 }
