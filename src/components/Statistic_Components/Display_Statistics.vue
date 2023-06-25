@@ -8,10 +8,8 @@
         <img :src="selectedImage.images.large" alt="Selected Pokemon Card" class="selected-pokemon-image" style="padding-top: 100px; padding-bottom: 50px;">
         <p class="textInformationStyle">Name: {{ selectedImage.name }}</p>
         <p class="textInformationStyle">Type: {{ selectedImage.types[0] }}</p>
-        <p class="textInformationStyle">Attack1: {{ selectedImage.attacks[0].name }}</p>
-        <p class="textInformationStyle">Attack2: {{ selectedImage.attacks[1].name }}</p>
-        <p class="textInformationStyle">Price(avg): {{ selectedImage.cardmarket.prices.averageSellPrice }}</p>
-        <!-- Add more details or information here -->
+        <p class="textInformationStyle">Price(low): {{ selectedImage.cardmarket.prices.lowPrice }}€</p>
+        <p class="textInformationStyle">Price(avg30): {{ selectedImage.cardmarket.prices.avg30}}€</p>
       </div>
     </div>
   </div>
@@ -72,6 +70,7 @@ export default {
 
 .content-container {
   display: flex;
+  height: 100vh; 
 }
 
 .image-container {
@@ -79,6 +78,13 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: scroll; 
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+
+.image-container::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar for Chrome, Safari, and Opera */
 }
 
 .pokemon-image {
@@ -94,11 +100,13 @@ export default {
 .sidebar {
   width: 20%;
   padding: 10px;
-  background-color: #f0f0f0;
-  border: 3px solid red;
+  border: 1px solid rgb(252, 204, 0);
+  backdrop-filter: brightness(60%);
   border-radius: 10px;
   margin-top: 20px;
   margin-right: 20px;
+  overflow-y: auto;
+
 }
 
 .selected-pokemon-image {
@@ -109,6 +117,6 @@ export default {
 }
 
 .grayscale {
-  filter: grayscale(100%);
+filter: invert(42%);
 }
 </style>

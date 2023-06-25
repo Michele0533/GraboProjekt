@@ -1,11 +1,15 @@
 <template>
   <div>
-    <button @click="generatePack()" class="open-pack-button">Open a Pack</button>
-  </div>
-  <div>
-    <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible" @close="closeDisplayCardsOverlay" @generatePack="generatePack" />
+    <div>
+      <button @click="generatePack()" class="open-pack-button">Open a Pack</button>
+    </div>
+    <div>
+      <DisplayCards_Component :packs="pack" :key="packKey" v-if="makeDisplayCardsVisible"
+        @close="closeDisplayCardsOverlay" @generatePack="generatePack" />
+    </div>
   </div>
 </template>
+
 
 <script>
 import DisplayCards_Component from './DisplayCards_Component.vue'
@@ -15,6 +19,7 @@ import { useStore } from 'vuex';
 export default {
   name: 'Generatepack_Component',
   props: ["Uapidata"],
+  emits: ['generatedPack'],
   components: {
     DisplayCards_Component
   },
@@ -31,14 +36,13 @@ export default {
   methods: {
     generatePack() {
       let rand = [];
-      let pack = [];
-      let indexArray = [];
       for (let i = 0; i < 10; i++) {
         rand[i] = Math.floor(Math.random() * 251);
         this.DBindexArray[i] = rand[i];
         this.pack[i] = this.Uapidata.data[rand[i]];
       }
-
+      //hoch geben an eltern component
+      this.$emit('generatedPack', this.pack);
       this.makeDisplayCardsVisible = true;
 
       let VUEXuser = this.$store.getters.getCurrentUser;
@@ -79,7 +83,7 @@ export default {
   background-color: #ffcd11;
   border: none;
   border-radius: 20px;
-  color: #000;
+  color: #000000;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
