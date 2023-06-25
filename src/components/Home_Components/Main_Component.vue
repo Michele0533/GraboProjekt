@@ -91,7 +91,7 @@ export default {
 
 <style scoped>
 .Main_Component {
-  height: 800px;
+  height: 0vh;
 }
 
 .image-container {
