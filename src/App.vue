@@ -10,7 +10,7 @@
         <div class="nav-links">
           <RouterLink id="Nav-Buttons" class="nav-link" to="/">Home</RouterLink>
           <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Inventory</RouterLink>
-          <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">SpielerKarte</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">Contact</RouterLink>
           <div class="auth-buttons">
             <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button"
               @click="logout()">Logout</button>
