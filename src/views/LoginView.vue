@@ -91,9 +91,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: hsl(218deg 50% 91%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+
 }
 
 .user-name,

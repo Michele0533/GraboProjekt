@@ -1,9 +1,8 @@
 <template>
   <div class="login-overlay">
     <div class="login-container">
-
       <div class="login-frame">
-        <h2>register</h2>
+        <h2>Register</h2>
         <div class="user-name">
           <label for="username">Username:</label>
           <input type="text" id="username" v-model="username" required placeholder="Enter your username">
@@ -13,17 +12,15 @@
           <input type="password" id="password" v-model="password" required
             placeholder="One capital letter, number and symbol">
         </div>
-        <form @submit.prevent="register">
-          <div class="button-container">
-            <button class="button back-button" @click="exitCurrentRouterView()">Back</button>
+        <div class="button-container">
+          <button class="button back-button" @click="exitCurrentRouterView()">Back</button>
+          <form @submit.prevent="register">
             <button class="button register-button" type="submit">Register</button>
-          </div>
-        </form>
-
+          </form>
+        </div>
         <p>users: myuser1234, TestUserForDemo</p>
         <p>pw: Passw0rd!</p>
         <h2>{{ "Status: " + this.message }}</h2>
-
       </div>
       <div class="login-fame-picture">
         <img
@@ -94,9 +91,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: hsl(218deg 50% 91%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
 }
 
 .user-name,
@@ -158,8 +152,6 @@ export default {
 
 
 .login-frame {
-  background: hsl(218deg 50% 91%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   text-align: center;
   width: 400px;

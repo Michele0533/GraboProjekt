@@ -100,7 +100,7 @@ export default {
 }
 
 .pokemon-image {
-  width: 15%;
+  width: 13%;
   margin: 10px;
   transition: transform 0.3s ease;
   /* Übergangseffekt definieren */

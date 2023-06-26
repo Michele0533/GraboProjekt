@@ -14,13 +14,12 @@ export default {
 
 <style scoped>
 .login-container {
-  height: 800px;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-#ConactFont{
+#ConactFont {
   color: white;
   text-align: center;
   text-shadow: 2px 2px #000000;
