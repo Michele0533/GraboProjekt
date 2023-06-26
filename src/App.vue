@@ -7,12 +7,10 @@
             src="https://cdn.discordapp.com/attachments/1074826548235993148/1121555724292608101/073EE5AF-698E-4CA0-BD00-F0AADC5A0226.PNG"
             alt="no Picture" />
         </div>
-
         <div class="nav-links">
           <RouterLink id="Nav-Buttons" class="nav-link" to="/">Home</RouterLink>
           <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Inventory</RouterLink>
           <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">SpielerKarte</RouterLink>
-
           <div class="auth-buttons">
             <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button"
               @click="logout()">Logout</button>
@@ -22,7 +20,6 @@
             <h2 id="currentuser"> {{ currentuser }} </h2>
           </div>
         </div>
-
       </nav>
     </header>
     <main>
@@ -159,6 +156,7 @@ export default {
   border-radius: 5px;
   font-family: 'Pokemon', sans-serif;
   cursor: pointer;
+  background-color: rgb(252, 204, 0);
   /* Ändern Sie den Wert auf den gewünschten Abstand */
   /* Ändern Sie den Wert auf den gewünschten Abstand */
 
