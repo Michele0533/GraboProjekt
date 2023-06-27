@@ -12,8 +12,10 @@
         <button @click="closeOverlay()" class="button pokemon-button">Close</button>
         <button @click="openAnother()" class="button pokemon-button">Open Another One</button>
         <div class="totals-container">
-          <div class="total-price">Total Price (low): {{ calculateTotalPrice('lowPrice') }}€</div>
-          <div class="total-price">Total Price (avg30): {{ calculateTotalPrice('avg30') }}€</div>
+          <div class="total-price">
+            Total Price (low): {{ calculateTotalPrice('lowPrice') }}€
+            Total Price (avg30): {{ calculateTotalPrice('avg30') }}€
+          </div>
         </div>
       </div>
     </div>
@@ -114,7 +116,6 @@ export default {
 }
 
 .image-container {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -193,5 +194,22 @@ export default {
 .pokemon-button {
   background-color: #f05030;
   color: #fff;
+}
+
+.totals-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.total-price {
+  padding: 10px;
+  border: 1px solid rgb(252, 204, 0);
+  backdrop-filter: brightness(60%);
+  border-radius: 10px;
+  margin-right: 20px;
+  font-size: 16px;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 </style>

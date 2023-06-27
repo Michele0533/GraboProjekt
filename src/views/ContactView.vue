@@ -52,7 +52,7 @@ export default {
   margin-top: 0px;
   margin-right: 20px;
   overflow-y: auto;
-  height: 75vh;
+  height: 50vh;
 }
 
 .user-image {
