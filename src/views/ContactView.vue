@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <div class="diff" v-for="(user, index) in users" :key="index">
+  <div class="contacts-container">
+    <div class="contact" v-for="(user, index) in users" :key="index">
       <div class="user-image">
         <img :src="user.image" alt="User Image" class="avatar">
       </div>
       <p><span class="label">Name:</span> {{ user.name }}</p>
-      <p><span class="label">Email:</span> {{ user.email }}</p>
+      <p><span class="label">E-mail:</span> {{ user.email }}</p>
     </div>
   </div>
 </template>
@@ -38,12 +38,12 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.contacts-container {
   display: flex;
   justify-content: center;
 }
 
-.diff {
+.contact {
   width: 30%;
   padding: 5px;
   border: 1px solid rgb(252, 204, 0);

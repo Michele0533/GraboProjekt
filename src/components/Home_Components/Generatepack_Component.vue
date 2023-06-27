@@ -83,13 +83,14 @@ export default {
   background-color: #ffcd11;
   border: none;
   border-radius: 20px;
-  color: #000000;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Pokemon', sans-serif;
 }
 
 .open-pack-button:hover {
-  background-color: #ffc400;
+  background-color: #e36209;
 }
 </style>

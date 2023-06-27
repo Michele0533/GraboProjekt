@@ -22,7 +22,7 @@
 import { useStore } from 'vuex';
 
 export default {
-  name: 'Display_Statistics',
+  name: 'Display_Inventory',
   props: ["StatisticApidata"],
   data() {
     return {
@@ -50,7 +50,7 @@ export default {
 
     // Prüfe, ob der Benutzer angemeldet ist
     if (VUEXuser == null) {
-      this.currentuser = "Du musst dich anmelden, um Statistiken zu sehen.";
+      this.currentuser = "Please Log in to see your collected Cards";
     } else {
       this.currentuser = VUEXuser;
     }

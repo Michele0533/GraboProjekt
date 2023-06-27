@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="greetings">
+    <div class="overlay">
       <div class="image-container">
         <div class="row" v-for="(row, rowIndex) in cardRows" :key="rowIndex">
           <div class="pokemon-card" v-for="(card, cardIndex) in row" :key="cardIndex">
@@ -11,10 +11,10 @@
       <div class="buttons-container">
         <button @click="closeOverlay()" class="button pokemon-button">Close</button>
         <button @click="openAnother()" class="button pokemon-button">Open Another One</button>
-        <div class="totals-container">
-          <div class="total-price">
-            Total Price (low): {{ calculateTotalPrice('lowPrice') }}€
-            Total Price (avg30): {{ calculateTotalPrice('avg30') }}€
+        <div class="price-container">
+          <div class="prices">
+            Total Price (lowest): {{ calculateTotalPrice('lowPrice') }}€
+            Total Price (avg30 days): {{ calculateTotalPrice('avg30') }}€
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@ export default {
 
 
 <style scoped>
-.greetings {
+.overlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -188,21 +188,21 @@ export default {
 }
 
 .button:hover {
-  background-color: #ffc400;
+  background-color: #e36209;
 }
 
 .pokemon-button {
-  background-color: #f05030;
+  background-color: rgb(252, 204, 0);
   color: #fff;
 }
 
-.totals-container {
+.price-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.total-price {
+.prices {
   padding: 10px;
   border: 1px solid rgb(252, 204, 0);
   backdrop-filter: brightness(60%);
@@ -210,6 +210,7 @@ export default {
   margin-right: 20px;
   font-size: 16px;
   overflow-y: auto;
-  scrollbar-width: none;
+  font-family: 'Pokemon', sans-serif;
+  color: #fff;
 }
 </style>

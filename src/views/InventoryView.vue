@@ -1,28 +1,27 @@
 <template>
-  <div class="test" v-if="currentuser == 'Please Log in to see your collected Cards'">
+  <div class="info" v-if="currentuser == 'Please Log in to see your collected Cards'">
     <h1 id="currentuser">{{ currentuser }}</h1>
   </div>
-  <div class="test" v-else>
+  <div class="info" v-else>
     <div v-if="checkApiData">
-      <Display_Statistics :StatisticApidata="ApiData" />
+      <Display_Inventory :StatisticApidata="ApiData" />
     </div>
     <div v-else>
       <div class="loading-container">
         <h1 id="LoadingData">Retrieving your Information</h1>
-        <!-- Hier kannst du einen Ladeindikator oder ein anderes Ladeelement hinzufügen -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Display_Statistics from '../components/Statistic_Components/Display_Statistics.vue'
+import Display_Inventory from '../components/Statistic_Components/Display_Inventory.vue'
 import axios from 'axios'
 
 export default {
-  name: 'StatisticView',
+  name: '',
   components: {
-    Display_Statistics
+    Display_Inventory
   },
 
   data() {
@@ -67,7 +66,7 @@ export default {
   height: 100%;
 }
 
-.test {
+.info {
   display: flex;
   justify-content: center;
   align-items: center;

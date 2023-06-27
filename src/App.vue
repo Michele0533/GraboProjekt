@@ -9,13 +9,13 @@
         </div>
         <div class="nav-links">
           <RouterLink id="Nav-Buttons" class="nav-link" to="/">Home</RouterLink>
-          <RouterLink id="Nav-Buttons" class="nav-link" to="/statistic">Inventory</RouterLink>
+          <RouterLink id="Nav-Buttons" class="nav-link" to="/inventory">Inventory</RouterLink>
           <RouterLink id="Nav-Buttons" class="nav-link" to="/contact">Contact</RouterLink>
           <div class="auth-buttons">
-            <button v-if="currentuser !== 'warte auf log in..'" class="pokemon-button logout-button"
+            <button v-if="currentuser !== 'awaiting login'" class="pokemon-button logout-button"
               @click="logout()">Logout</button>
             <button v-else class="pokemon-button login-button" @click="openLoginWindow()">Login</button>
-            <button v-if="currentuser === 'warte auf log in..'" class="pokemon-button register-button"
+            <button v-if="currentuser === 'awaiting login'" class="pokemon-button register-button"
               @click="openRegisterWindow()">Register</button>
             <h2 id="currentuser"> {{ currentuser }} </h2>
           </div>
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      currentuser: 'warte auf log in..'
+      currentuser: 'awaiting login'
     }
   },
   mounted() {
@@ -48,7 +48,7 @@ export default {
   },
   watch: {
     '$store.getters.getCurrentUser'(newUser) {
-      this.currentuser = newUser || 'warte auf log in..';
+      this.currentuser = newUser || 'awaiting login';
     }
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
     logout() {
       this.$store.dispatch('setCurrentUser', null); // Set the logged-in user to null.
       console.log("Successfully logged out.");
-      this.currentuser = "warte auf log in..";
+      this.currentuser = "awaiting login";
     },
     openRegisterWindow() {
       this.$router.push('/register'); // Redirect to the register view (router)
@@ -116,7 +116,7 @@ export default {
 }
 
 #Nav-Buttons {
-  font-size: 17px;
+  font-size: 16px;
   padding: 10px 20px;
   background-color: rgb(252, 204, 0);
   color: #ffffff;
@@ -180,7 +180,7 @@ export default {
 }
 
 .pokemon-button:active {
-  background-color: #b74a07;
+  background-color: #e36209;
   transform: translateY(1px);
 }
 
