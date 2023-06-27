@@ -17,18 +17,18 @@ export default {
     return {
       users: [
         {
-          name: 'Jonas',
+          name: 'Jonas Sauer',
           email: 'jonas.sauer@hs-weingarten.de',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZLkfd8TcbE1PMWQMddV8_kOeq0UacbhH0p7zEHdhfw&s'
         },
         {
-          name: 'Selchuk',
+          name: 'Selchuk Chraloglou',
           email: 'chraloglou.selchuk@hs-weingarten.de',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZLkfd8TcbE1PMWQMddV8_kOeq0UacbhH0p7zEHdhfw&s'
         },
         {
-          name: 'Michi',
-          email: 'XY.XY@hs-weingarten.de',
+          name: 'Michele Abbruzzese',
+          email: 'Michele.Abbruzzese@hs-weingarten.de',
           image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkZLkfd8TcbE1PMWQMddV8_kOeq0UacbhH0p7zEHdhfw&s'
         }
       ]

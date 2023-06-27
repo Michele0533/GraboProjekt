@@ -61,15 +61,23 @@ export default {
       this.cardRows = [];
       let index = 0;
       while (index < pokemonNames.length) {
-        const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => ({
-          image: pokemon.images.large,
-          showPrices: false,
-          prices: pokemon.cardmarket.prices
-        }));
+        const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => {
+          const card = {
+            image: pokemon.images.large,
+            showPrices: false
+          };
+
+          if (pokemon.cardmarket && pokemon.cardmarket.prices) {
+            card.prices = pokemon.cardmarket.prices;
+          }
+
+          return card;
+        });
         this.cardRows.push(row);
         index += cardsPerRow;
       }
     },
+
 
     showPrices(card) {
       this.cardRows.forEach(row => {
