@@ -1,23 +1,15 @@
 <template>
   <div>
-    <div class="overlay">
+    <div class="greetings">
       <div class="image-container">
         <div class="row" v-for="(row, rowIndex) in cardRows" :key="rowIndex">
-          <div class="pokemon-card" v-for="(card, cardIndex) in row" :key="cardIndex">
-            <img :src="card.image" alt="Pokemon Card" class="pokemon-image">
-          </div>
+          <img v-for="(card, cardIndex) in row" :key="cardIndex" :src="card" alt="Pokemon Card" class="pokemon-image"
+            :style="{ marginRight: cardIndex !== row.length - 1 ? '30px' : '0' }">
         </div>
       </div>
       <div class="buttons-container">
         <button @click="closeOverlay()" class="button pokemon-button">Close</button>
         <button @click="openAnother()" class="button pokemon-button">Open Another One</button>
-        <div class="price-container">
-          <div class="prices">
-            Total Price (lowest): {{ card.prices?.lowPrice || 'N/A' }}€
-            Total Price (avg30 days): {{ card.prices?.avg30 || 'N/A' }}€
-          </div>
-
-        </div>
       </div>
     </div>
   </div>
@@ -31,13 +23,12 @@ export default {
     return {
       Text: '',
       packlist: {},
-      cardRows: [],
-
+      cardRows: []
     };
   },
   watch: {
     packs: {
-      immediate: true,
+      immediate: true, // Aktualisierung beim Mounten der Komponente
       handler(newVal) {
         this.packlist = newVal;
         this.splitCardsIntoRows();
@@ -46,12 +37,12 @@ export default {
   },
   methods: {
     closeOverlay() {
-      this.$emit('close');
+      this.$emit('close'); // Event auslösen, um das Overlay zu schließen
     },
 
     openAnother() {
       setTimeout(() => {
-        this.$emit('generatePack');
+        this.$emit('generatePack'); // Event auslösen, um ein neues Pack zu öffnen
       }, 1000);
     },
 
@@ -63,55 +54,17 @@ export default {
       this.cardRows = [];
       let index = 0;
       while (index < pokemonNames.length) {
-        const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => {
-          const card = {
-            image: pokemon.images.large,
-            showPrices: false
-          };
-
-          if (pokemon.cardmarket && pokemon.cardmarket.prices) {
-            card.prices = pokemon.cardmarket.prices;
-          }
-
-          return card;
-        });
+        const row = pokemonNames.slice(index, index + cardsPerRow).map(pokemon => pokemon.images.large);
         this.cardRows.push(row);
         index += cardsPerRow;
       }
-    },
-
-
-    showPrices(card) {
-      this.cardRows.forEach(row => {
-        row.forEach(c => {
-          c.showPrices = false;
-        });
-      });
-      card.showPrices = true;
-    },
-
-    hidePrices(card) {
-      card.showPrices = false;
-    },
-
-    calculateTotalPrice(priceKey) {
-      let totalPrice = 0;
-      this.cardRows.forEach(row => {
-        row.forEach(card => {
-          if (card.prices?.[priceKey]) {
-            totalPrice += card.prices[priceKey];
-          }
-        });
-      });
-      return totalPrice.toFixed(2);
     }
   }
 }
 </script>
 
-
 <style scoped>
-.overlay {
+.greetings {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -141,49 +94,11 @@ export default {
   margin-bottom: 30px;
 }
 
-.pokemon-card {
-  position: relative;
-  margin-right: 20px;
-}
-
-.pokemon-image {
-  max-width: 190px;
-  height: auto;
-  margin-right: 20px;
-  transition: transform 0.3s ease;
-}
-
-.pokemon-image:last-child {
-  margin-right: 0;
-}
-
-.pokemon-image:hover {
-  transform: scale(1.1);
-}
-
-.prices-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.row-prices {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.card-price {
-  margin: 0 10px;
-  text-align: center;
-}
-
 .buttons-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .button {
@@ -200,29 +115,25 @@ export default {
 }
 
 .button:hover {
-  background-color: #e36209;
+  background-color: #ffc400;
 }
 
 .pokemon-button {
-  background-color: rgb(252, 204, 0);
+  background-color: #f05030;
   color: #fff;
 }
 
-.price-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.pokemon-image {
+  max-width: 12.5%;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
 }
 
-.prices {
-  padding: 10px;
-  border: 1px solid rgb(252, 204, 0);
-  backdrop-filter: brightness(60%);
-  border-radius: 10px;
-  margin-right: 20px;
-  font-size: 16px;
-  overflow-y: auto;
-  font-family: 'Pokemon', sans-serif;
-  color: #fff;
+.pokemon-image:last-child {
+  margin-right: 0;
+}
+
+.pokemon-image:hover {
+  transform: scale(1.1);
 }
 </style>
