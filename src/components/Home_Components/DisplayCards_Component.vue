@@ -13,9 +13,10 @@
         <button @click="openAnother()" class="button pokemon-button">Open Another One</button>
         <div class="price-container">
           <div class="prices">
-            Total Price (lowest): {{ calculateTotalPrice('lowPrice') }}€
-            Total Price (avg30 days): {{ calculateTotalPrice('avg30') }}€
+            Total Price (lowest): {{ card.prices?.lowPrice || 'N/A' }}€
+            Total Price (avg30 days): {{ card.prices?.avg30 || 'N/A' }}€
           </div>
+
         </div>
       </div>
     </div>
@@ -31,6 +32,7 @@ export default {
       Text: '',
       packlist: {},
       cardRows: [],
+
     };
   },
   watch: {
@@ -96,7 +98,9 @@ export default {
       let totalPrice = 0;
       this.cardRows.forEach(row => {
         row.forEach(card => {
-          totalPrice += card.prices[priceKey];
+          if (card.prices?.[priceKey]) {
+            totalPrice += card.prices[priceKey];
+          }
         });
       });
       return totalPrice.toFixed(2);
