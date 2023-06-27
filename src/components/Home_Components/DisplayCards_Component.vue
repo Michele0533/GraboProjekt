@@ -78,6 +78,7 @@ export default {
       }
     },
 
+
     showPrices(card) {
       this.cardRows.forEach(row => {
         row.forEach(c => {
