@@ -40,7 +40,7 @@ export default {
     return {
       url: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardLogInTrigger',
       code: 'zzrkFoLkMlBkIcx5qvEBifZzzoxnczy5_rRUGAGpc0k5AzFuplGmMg==',
-      message: "warte auf Log In",
+      message: "waiting for login",
       username: '',
       password: '',
     };
@@ -48,7 +48,7 @@ export default {
   methods: {
     login() {
       if (this.username !== '' && this.password !== '') {
-        this.message = "lade..";
+        this.message = "loading..";
 
         // API Request - Prüfe ob Eingabe korrekt ist.
         axios.get(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
@@ -154,7 +154,9 @@ export default {
   cursor: pointer;
 }
 
-
+.button:hover {
+  background-color: #e36209;
+}
 
 .login-frame {
 

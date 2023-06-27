@@ -1,7 +1,7 @@
 <template>
-  <div class="login-overlay">
-    <div class="login-container">
-      <div class="login-frame">
+  <div class="register-overlay">
+    <div class="register-container">
+      <div class="register-frame">
         <h2>Register</h2>
         <div class="user-name">
           <label for="username">Username:</label>
@@ -10,7 +10,7 @@
         <div class="user-password">
           <label for="password">Password:</label>
           <input type="password" id="password" v-model="password" required
-            placeholder="One capital letter, number and symbol">
+            placeholder="One capital letter, number, symbol and min. 8 characters">
         </div>
         <div class="button-container">
           <button class="button back-button" @click="exitCurrentRouterView()">Back</button>
@@ -40,7 +40,7 @@ export default {
     return {
       url: 'https://pokecardbackenduser.azurewebsites.net/api/PokeCardLogInTrigger',
       code: 'zzrkFoLkMlBkIcx5qvEBifZzzoxnczy5_rRUGAGpc0k5AzFuplGmMg==',
-      message: "warte auf Registrierung",
+      message: "waiting for registration",
       username: '',
       password: '',
     };
@@ -48,7 +48,7 @@ export default {
   methods: {
     register() {
       if (this.username !== '' && this.password !== '') {
-        this.message = "lade..";
+        this.message = "loading..";
 
         // API Request - Prüfe ob Eingabe korrekt ist.
         axios.post(`${this.url}?username=${this.username}&password=${this.password}&code=${this.code}`)
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.login-overlay {
+.register-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -87,7 +87,7 @@ export default {
   align-items: center;
 }
 
-.login-container {
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,7 +120,7 @@ export default {
 .user-password input {
   outline: none;
   border: none;
-  font-size: 18px;
+  font-size: 13px;
   background-color: rgb(252, 204, 0);
   padding: 0em;
   display: flex;
@@ -150,8 +150,11 @@ export default {
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #e36209;
+}
 
-.login-frame {
+.register-frame {
   border-radius: 10px;
   text-align: center;
   width: 400px;

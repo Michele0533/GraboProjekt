@@ -1,6 +1,6 @@
 <template>
   <div class="Main_Component">
-    <div class="image-container">
+    <div class="image-side-bar">
       <img id="logo" :src="imgURL" alt="Logo" />
     </div>
     <div class="button-container">
@@ -94,7 +94,7 @@ export default {
   height: 0vh;
 }
 
-.image-container {
+.image-side-bar {
   float: right;
   width: 40%;
   padding-top: 2%;
